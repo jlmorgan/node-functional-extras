@@ -1,13 +1,53 @@
 {
-  "author": "Justin Morgan <justin.l.morgan@gmail.com>",
+  "author": {
+    "email": "justin.l.morgan@gmail.com",
+    "name": "Justin Morgan"
+  },
+  "bugs": {
+    "url": "https://github.com/jlmorgan/node-functional-extras/issues"
+  },
   "description": "A collection of functional extras for Node.js.",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "uuid": "^3.3.2"
+  },
+  "directories": {
+    "doc": "docs",
+    "lib": "src",
+    "test": "test"
+  },
+  "files": [
+    "docs",
+    "src",
+    "index.js",
+    "package-lock.json"
+  ],
+  "keywords": [
+    "combinator",
+    "compose",
+    "const",
+    "extras",
+    "flip",
+    "function",
+    "functional",
+    "identity",
+    "morphism",
+    "pipe"
+  ],
   "liscense": "MIT",
   "main": "index.js",
   "name": "functional-extras",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jlmorgan/node-functional-extras"
+  },
   "scripts": {
-    "build": "npm run docs && npm run lint && npm run coverage",
-    "coverage": "istanbul cover --dir build/coverage mocha -- 'test/**/*Spec.js' && istanbul report html --dir build/coverage",
-    "docs": "jsdoc ./src/*.js -t lib/jsdoc",
+    "build": "npm run lint && npm run coverage",
+    "clean": "rm -r build",
+    "coverage": "nyc npm run test",
     "lint": "eslint src test",
     "next-version": "semver -i $(npm run --silent semver-level) $(npm run --silent package-version)",
     "package-version": "node -pe \"require('./package.json').version\"",
@@ -15,15 +55,9 @@
     "preversion": "git checkout -b release/$(npm run --silent next-version) origin/dev",
     "promote": "npm --no-git-tag-version version $(npm run --silent semver-level)",
     "semver-level": "git log origin/dev ^master --format=%b | grep -i semver | cut -d ':' -f 2 | sort -u | head -1 | tr '[:upper:]' '[:lower:]'",
+    "test": "mocha 'test/**/*Spec.js'",
     "version": "git add package.json && git commit -m \"Version bump to $(npm run --silent package-version)\""
   },
-  "test": "mocha 'test/**/*Spec.js'",
-  "version": "0.0.0",
-  "devDependencies": {
-    "chain": "^0.1.3",
-    "eslint": "^5.16.0",
-    "istanbul": "^0.4.5",
-    "jsdoc": "^3.5.5",
-    "mocha": "^6.1.2"
-  }
+  "test": "npm run test",
+  "version": "0.0.0"
 }
