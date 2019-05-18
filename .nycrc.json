@@ -1,0 +1,8 @@
+{
+  "all": true,
+  "check-coverage": true,
+  "include": ["src/**"],
+  "report-dir": "./build/reports/coverage",
+  "reporter": ["html"],
+  "temp-dir": "./build/coverage"
+}
