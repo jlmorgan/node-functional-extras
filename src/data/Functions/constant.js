@@ -3,6 +3,7 @@
 /**
  * The {@code K} combinator. Creates a unary function that ignores the input value and returns the original value.
  *
+ * @memberof Functions
  * @param {*} a - The return value of the unary function.
  * @return {Function} Returns a unary function that takes a value and returns the original value.
  */

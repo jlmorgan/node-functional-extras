@@ -3,6 +3,7 @@
 /**
  * Composes two functions {@code g} after {@code f}.
  *
+ * @memberof Functions
  * @param {Function} g - The second function.
  * @param {Function} f - The first function.
  * @return {Function} Returns a function that maps a value {@code a} to {@code c}.

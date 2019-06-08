@@ -16,7 +16,7 @@ describe("compose", () => {
       const expectedResult = testBToC(testAToB(testInputA));
       const actualResult = compose(testBToC)(testAToB)(testInputA);
 
-      expect(expectedResult).to.eql(actualResult);
+      expect(actualResult).to.eql(expectedResult);
     });
   });
 
@@ -25,7 +25,7 @@ describe("compose", () => {
       const expectedResult = testBToC(testAToB(testInputA));
       const actualResult = compose(testBToC, testAToB)(testInputA);
 
-      expect(expectedResult).to.eql(actualResult);
+      expect(actualResult).to.eql(expectedResult);
     });
   });
 });

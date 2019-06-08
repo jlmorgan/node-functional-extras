@@ -2,4 +2,6 @@
 
 ## Table of Contents
 
-* [`.of`](./of.md)
+* [`.curry`](./curry.md)
+* [`.curryN`](./curryN.md)
+* [`.isTuple`](./isTuple.md)

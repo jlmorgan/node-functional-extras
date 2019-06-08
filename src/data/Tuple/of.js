@@ -6,6 +6,7 @@ const Tuple = require("./Tuple");
 /**
  * Creates a {@link Tuple} with two values.
  *
+ * @memberof Tuple
  * @param {*} first - The first element.
  * @param {*} second - The second element.
  * @return {Tuple} A {@link Tuple} of two values.

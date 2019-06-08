@@ -15,6 +15,6 @@ describe("constant", () => {
     const expectedResult = testValue;
     const actualResult = testFunction(testSecondValue);
 
-    expect(expectedResult).to.eql(actualResult);
+    expect(actualResult).to.eql(expectedResult);
   });
 });

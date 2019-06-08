@@ -16,7 +16,7 @@ describe("pipe", () => {
       const expectedResult = testBToC(testAToB(testInputA));
       const actualResult = pipe(testAToB)(testBToC)(testInputA);
 
-      expect(expectedResult).to.eql(actualResult);
+      expect(actualResult).to.eql(expectedResult);
     });
   });
 
@@ -25,7 +25,7 @@ describe("pipe", () => {
       const expectedResult = testBToC(testAToB(testInputA));
       const actualResult = pipe(testAToB, testBToC)(testInputA);
 
-      expect(expectedResult).to.eql(actualResult);
+      expect(actualResult).to.eql(expectedResult);
     });
   });
 });

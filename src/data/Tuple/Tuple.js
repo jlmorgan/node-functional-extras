@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * A finite order sequence of elements.
+ * A finite ordered sequence of elements.
  */
 class Tuple {
   /**

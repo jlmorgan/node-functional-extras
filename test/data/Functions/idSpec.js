@@ -13,6 +13,6 @@ describe("id", () => {
     const expectedResult = testValue;
     const actualResult = id(testValue);
 
-    expect(expectedResult).to.eql(actualResult);
+    expect(actualResult).to.eql(expectedResult);
   });
 });
