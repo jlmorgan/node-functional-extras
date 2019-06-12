@@ -3,6 +3,7 @@
 /**
  * Flips the argument order of the specified function.
  *
+ * @memberof Functions
  * @param {Function} f - The function to flip.
  * @return {Function} The curried flipped function.
  */

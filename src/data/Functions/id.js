@@ -3,6 +3,7 @@
 /**
  * The {@code I} combinator or identity morphism.
  *
+ * @memberof Functions
  * @param {*} a - The input value.
  * @return {*} The input value.
  */

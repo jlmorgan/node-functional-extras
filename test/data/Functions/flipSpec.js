@@ -16,7 +16,7 @@ describe("flip", () => {
       const expectedResult = testFunction(testA)(testB);
       const actualResult = flipCurried(testFunction)(testB)(testA);
 
-      expect(expectedResult).to.eql(actualResult);
+      expect(actualResult).to.eql(expectedResult);
     });
 
     it("should allow uncurried flipped arguments for function", () => {
@@ -26,7 +26,7 @@ describe("flip", () => {
       const expectedResult = testFunction(testA)(testB);
       const actualResult = flipCurried(testFunction)(testB, testA);
 
-      expect(expectedResult).to.eql(actualResult);
+      expect(actualResult).to.eql(expectedResult);
     });
   });
 
@@ -38,7 +38,7 @@ describe("flip", () => {
       const expectedResult = testFunction(testA, testB);
       const actualResult = flip(testFunction)(testB, testA);
 
-      expect(expectedResult).to.eql(actualResult);
+      expect(actualResult).to.eql(expectedResult);
     });
 
     it("should allow curried flipped arguments for function", () => {
@@ -48,7 +48,7 @@ describe("flip", () => {
       const expectedResult = testFunction(testA, testB);
       const actualResult = flip(testFunction)(testB)(testA);
 
-      expect(expectedResult).to.eql(actualResult);
+      expect(actualResult).to.eql(expectedResult);
     });
   });
 });

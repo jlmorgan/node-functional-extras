@@ -32,7 +32,7 @@ describe("Tuple", () => {
       const expectedResult = Tuple.of(testFirstValue, testSecondValue);
       const actualResult = Tuple.of(testFirstValue)(testSecondValue);
 
-      expect(expectedResult).to.eql(actualResult);
+      expect(actualResult).to.eql(expectedResult);
     });
   });
 
@@ -85,7 +85,7 @@ describe("Tuple", () => {
       const expectedResult = testFirstValue;
       const actualResult = testTuple.first();
 
-      expect(expectedResult).to.equal(actualResult);
+      expect(actualResult).to.equal(expectedResult);
     });
   });
 
@@ -95,7 +95,7 @@ describe("Tuple", () => {
       const expectedResult = testSecondValue;
       const actualResult = testTuple.second();
 
-      expect(expectedResult).to.equal(actualResult);
+      expect(actualResult).to.equal(expectedResult);
     });
   });
 
@@ -105,7 +105,7 @@ describe("Tuple", () => {
       const expectedResult = Tuple.of(testSecondValue, testFirstValue);
       const actualResult = testTuple.swap();
 
-      expect(expectedResult).to.eql(actualResult);
+      expect(actualResult).to.eql(expectedResult);
     });
   });
 
@@ -117,7 +117,7 @@ describe("Tuple", () => {
       });
       const actualResult = testTuple.toJSON();
 
-      expect(expectedResult).to.equal(actualResult);
+      expect(actualResult).to.equal(expectedResult);
     });
   });
 
@@ -127,7 +127,7 @@ describe("Tuple", () => {
       const expectedResult = `Tuple(${testFirstValue}, ${testSecondValue})`;
       const actualResult = testTuple.toString();
 
-      expect(expectedResult).to.equal(actualResult);
+      expect(actualResult).to.equal(expectedResult);
     });
   });
 });
