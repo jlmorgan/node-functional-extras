@@ -66,9 +66,9 @@ class Tuple {
    * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
    */
   toJSON() {
-    return JSON.stringify({
+    return {
       "tuple": [this.first(), this.second()]
-    });
+    };
   }
 
   /**

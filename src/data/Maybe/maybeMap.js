@@ -20,7 +20,7 @@ const isJust = require("./isJust");
  */
 function maybeMap(defaultValue, morphism, value) {
   if (!isFunction(morphism)) {
-    throw new TypeError("morphism must be a function");
+    throw new TypeError("morphism must be a Function");
   }
 
   return isJust(value) ? morphism(fromJust(value)) : defaultValue;

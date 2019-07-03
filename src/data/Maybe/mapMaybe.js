@@ -18,7 +18,7 @@ const isJust = require("./isJust");
  */
 function mapMaybe(morphism, list) {
   if (!isFunction(morphism)) {
-    throw new TypeError("morphism must be a function");
+    throw new TypeError("morphism must be a Function");
   }
 
   return (list || [])

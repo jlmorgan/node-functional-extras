@@ -210,7 +210,7 @@ describe("Maybe", () => {
       const testInvalidMorphism = null;
       const testMaybe = Maybe.Nothing();
 
-      expect(() => Maybe.mapMaybe(testInvalidMorphism)(testMaybe)).to.throw(TypeError, "morphism must be a function");
+      expect(() => Maybe.mapMaybe(testInvalidMorphism)(testMaybe)).to.throw(TypeError, "morphism must be a Function");
     });
 
     it("should return nothing for undefined list", () => {
@@ -262,7 +262,7 @@ describe("Maybe", () => {
 
       expect(() => Maybe.maybeMap(testDefaultValue)(testMorphism)(testMaybe)).to.throw(
         TypeError,
-        "morphism must be a function"
+        "morphism must be a Function"
       );
     });
 
@@ -398,7 +398,7 @@ describe("Maybe", () => {
     describe("#toJSON", () => {
       it("should return a JSON formatted string", () => {
         const expectedResult = JSON.stringify(testValue);
-        const actualResult = testMaybe.toJSON();
+        const actualResult = JSON.stringify(testMaybe);
 
         expect(actualResult).to.eql(expectedResult);
       });
@@ -477,7 +477,7 @@ describe("Maybe", () => {
     describe("#toJSON", () => {
       it("should return a JSON formatted string", () => {
         const expectedResult = JSON.stringify(null);
-        const actualResult = testMaybe.toJSON();
+        const actualResult = JSON.stringify(testMaybe);
 
         expect(actualResult).to.eql(expectedResult);
       });
