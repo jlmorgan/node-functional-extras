@@ -1,6 +1,7 @@
 "use strict";
 
 // Project
+const curry = require("./curry");
 const Tuple = require("./Tuple");
 
 /**
@@ -12,9 +13,7 @@ const Tuple = require("./Tuple");
  * @return {Tuple} A {@link Tuple} of two values.
  */
 function of(first, second) {
-  return arguments.length === 1 ?
-    b => new Tuple(first, b) :
-    new Tuple(first, second);
+  return new Tuple(first, second);
 }
 
-module.exports = of;
+module.exports = curry(of);

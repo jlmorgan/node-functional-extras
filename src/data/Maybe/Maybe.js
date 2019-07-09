@@ -68,7 +68,7 @@ class Just extends Maybe {
    * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
    */
   toJSON() {
-    return JSON.stringify(this._value);
+    return this._value;
   }
 
   /**
@@ -121,7 +121,7 @@ class Nothing extends Maybe {
    * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
    */
   toJSON() {
-    return JSON.stringify(null);
+    return null;
   }
 
   /**
@@ -148,6 +148,14 @@ const INSTANCE = new Nothing();
 module.exports = {
   isMaybe: Maybe.isMaybe,
 
+  /**
+   * Creates a {@code Just} of the value.
+   *
+   * @constructor
+   * @param {*} value - A non-null value.
+   * @return {Maybe} The {@link Maybe} of the {@code value}.
+   * @throws {TypeError} if the {@code value} is {@code null} or {@code undefined}.
+   */
   Just(value) {
     if (isNone(value)) {
       throw new TypeError("value must not be null or undefined");
@@ -156,6 +164,12 @@ module.exports = {
     return new Just(value);
   },
 
+  /**
+   * Creates a nothing to represent {@code null} or a missing value.
+   *
+   * @constructor
+   * @return {Maybe} A {@code Nothing}.
+   */
   Nothing() {
     return INSTANCE;
   }

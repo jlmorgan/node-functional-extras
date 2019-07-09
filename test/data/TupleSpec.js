@@ -115,7 +115,7 @@ describe("Tuple", () => {
       const expectedResult = JSON.stringify({
         "tuple": [testFirstValue, testSecondValue]
       });
-      const actualResult = testTuple.toJSON();
+      const actualResult = JSON.stringify(testTuple);
 
       expect(actualResult).to.equal(expectedResult);
     });

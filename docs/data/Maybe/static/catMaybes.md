@@ -4,7 +4,7 @@ Takes a list of `Maybe` and returns a list of the `Just` values.
 
 ## Arguments
 
-* `list (Array)`: List of `Maybe`.
+* `list (Maybe[])`: List of `Maybe`.
 
 ## Returns
 
