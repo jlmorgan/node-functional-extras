@@ -6,7 +6,9 @@ const constant = require("./constant");
 const flip = require("./flip");
 const flipCurried = require("./flipCurried");
 const id = require("./id");
+const isFunction = require("./isFunction");
 const pipe = require("./pipe");
+const requireFunction = require("./requireFunction");
 
 module.exports = {
   compose,
@@ -14,5 +16,7 @@ module.exports = {
   flip,
   flipCurried,
   id,
-  pipe
+  isFunction,
+  pipe,
+  requireFunction
 };

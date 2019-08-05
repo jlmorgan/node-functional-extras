@@ -12,7 +12,7 @@ class Maybe {
   /**
    * Determines whether or not the {@code value} is a {@link Maybe}.
    *
-   * @param {*} value - A value.
+   * @param {*} value - The value.
    * @return {Boolean} {@code true} for a {@link Maybe}; otherwise, {@code false}.
    */
   static isMaybe(value) {
@@ -42,7 +42,7 @@ class Just extends Maybe {
   }
 
   /**
-   * Determine whether or not the {@code other} has the same value as the current {@code instance}.
+   * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
    * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
@@ -97,7 +97,7 @@ class Just extends Maybe {
  */
 class Nothing extends Maybe {
   /**
-   * Determine whether or not the {@code other} has the same value as the current {@code instance}.
+   * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
    * @return {Boolean} {@code true} for equality; otherwise, {@code false}.

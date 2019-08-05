@@ -6,10 +6,6 @@ Extracts from a list of `Either` all of the `Right` elements in extracted order.
 
 * `list (Either[])` - The list of `Either`.
 
-## Types
-
-* `(*)`: The underlying right values.
-
 ## Returns
 
 * `(Array)`: The list of underlying `Right` values.

@@ -12,10 +12,10 @@ const { Either, Tuple } = require("../..");
 /* eslint-disable max-lines-per-function */
 describe("Either", () => {
   describe(".eitherMap", () => {
-    it("should throw exception for a non-function Left morphism", () => {
+    it("should throw exception for a non-Function Left morphism", () => {
       const testLeftMorphism = null;
       const testRightMorphism = value => value.length;
-      const testEither = Either.Right(uuid());
+      const testEither = Either.Left(uuid());
 
       expect(() => Either.eitherMap(testLeftMorphism)(testRightMorphism)(testEither)).to.throw(
         TypeError,
@@ -23,7 +23,7 @@ describe("Either", () => {
       );
     });
 
-    it("should throw exception for a non-function Right morphism", () => {
+    it("should throw exception for a non-Function Right morphism", () => {
       const testLeftMorphism = error => error.message;
       const testRightMorphism = null;
       const testEither = Either.Right(uuid());
@@ -227,7 +227,7 @@ describe("Either", () => {
       expect(actualResult).to.eql(expectedResult);
     });
 
-    it("should return list of Right values for mixed list", () => {
+    it("should return lists for mixed list", () => {
       const testLeftValue1 = new Error(uuid());
       const testLeftValue2 = new Error(uuid());
       const testRightValue1 = uuid();

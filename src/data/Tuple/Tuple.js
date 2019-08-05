@@ -20,7 +20,7 @@ class Tuple {
   }
 
   /**
-   * Determine whether or not the {@code other} has the same value as the current {@code instance}.
+   * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
    * @return {Boolean} {@code true} for equality; otherwise, {@code false}.

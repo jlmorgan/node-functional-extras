@@ -3,8 +3,8 @@
 // Project
 const curryN = require("../Tuple/curryN");
 const fromJust = require("./fromJust");
-const isFunction = require("../../isFunction");
 const isJust = require("./isJust");
+const requireFunction = require("../Functions/requireFunction");
 
 /**
  * If the {@link Maybe} value is a {@code Nothing}, it returns the {@code defaultValue}; otherwise, applies the
@@ -19,11 +19,9 @@ const isJust = require("./isJust");
  * @throws {TypeError} if the {@code morphism} is {@code null}.
  */
 function maybeMap(defaultValue, morphism, value) {
-  if (!isFunction(morphism)) {
-    throw new TypeError("morphism must be a Function");
-  }
-
-  return isJust(value) ? morphism(fromJust(value)) : defaultValue;
+  return isJust(value) ?
+    requireFunction(morphism, "morphism")(fromJust(value)) :
+    defaultValue;
 }
 
 module.exports = curryN(3, maybeMap); // eslint-disable-line no-magic-numbers

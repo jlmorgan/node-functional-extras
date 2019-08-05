@@ -1,5 +1,8 @@
 "use strict";
 
+// Project
+const curry = require("../Tuple/curry");
+
 /**
  * Flips the argument order of the specified function.
  *
@@ -8,11 +11,7 @@
  * @return {Function} The curried flipped function.
  */
 function flip(f) {
-  return function(b, a) {
-    return arguments.length === 1 ?
-      a1 => f(a1, b) :
-      f(a, b);
-  };
+  return curry((b, a) => f(a, b));
 }
 
 module.exports = flip;

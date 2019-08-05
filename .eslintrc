@@ -251,13 +251,13 @@
           "D",
           "Either",
           "F",
-          "Fail",
+          "Failure",
           "Just",
           "Left",
           "Maybe",
           "Nothing",
-          "Pass",
           "Right",
+          "Success",
           "Validation"
         ]
       }

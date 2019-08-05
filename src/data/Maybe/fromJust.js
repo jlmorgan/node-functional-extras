@@ -12,7 +12,7 @@ const isJust = require("./isJust");
  */
 function fromJust(maybe) {
   if (!isJust(maybe)) {
-    throw new TypeError("maybe must not be undefined, null, or Nothing");
+    throw new TypeError("maybe must not be Nothing");
   }
 
   return maybe.valueOf();

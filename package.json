@@ -9,15 +9,18 @@
   "description": "A collection of functional extras for Node.js.",
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^5.16.0",
-    "mocha": "^6.1.4",
+    "eslint": "^6.3.0",
+    "mocha": "^6.2.0",
     "nyc": "^14.1.1",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.3"
   },
   "directories": {
     "doc": "docs",
     "lib": "src",
     "test": "test"
+  },
+  "engines": {
+    "node": "^8.10.0 || ^10.13.0 || >=11.10.1"
   },
   "files": [
     "docs",
@@ -29,13 +32,16 @@
     "combinator",
     "compose",
     "const",
+    "Either",
     "extras",
     "flip",
     "function",
     "functional",
     "identity",
+    "Maybe",
     "morphism",
-    "pipe"
+    "pipe",
+    "Validation"
   ],
   "liscense": "MIT",
   "main": "index.js",

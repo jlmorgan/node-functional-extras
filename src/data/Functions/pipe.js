@@ -1,5 +1,8 @@
 "use strict";
 
+// Project
+const curry = require("../Tuple/curry");
+
 /**
  * Composes two functions {@code f} before {@code g}.
  *
@@ -9,9 +12,7 @@
  * @return {Function} Returns a function that maps a value {@code a} to {@code c}.
  */
 function pipe(f, g) {
-  return arguments.length === 1 ?
-    g1 => pipe(f, g1) :
-    x => g(f(x));
+  return x => g(f(x));
 }
 
-module.exports = pipe;
+module.exports = curry(pipe);
