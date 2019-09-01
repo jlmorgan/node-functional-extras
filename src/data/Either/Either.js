@@ -9,7 +9,7 @@ class Either {
   /**
    * Determines whether or not the {@code value} is a {@link Either}.
    *
-   * @param {*} value - A value.
+   * @param {*} value - The value.
    * @return {Boolean} {@code true} for a {@link Either}; otherwise, {@code false}.
    */
   static isEither(value) {
@@ -39,7 +39,7 @@ class Left extends Either {
   }
 
   /**
-   * Determine whether or not the {@code other} has the same value as the current {@code instance}.
+   * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
    * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
@@ -100,7 +100,7 @@ class Right extends Either {
   }
 
   /**
-   * Determine whether or not the {@code other} has the same value as the current {@code instance}.
+   * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
    * @return {Boolean} {@code true} for equality; otherwise, {@code false}.

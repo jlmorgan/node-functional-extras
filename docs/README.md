@@ -7,6 +7,7 @@
     * [`Functions`](./data/Functions)
     * [`Maybe`](./data/Maybe)
     * [`Tuple`](./data/Tuple)
+    * [`Validation`](./data/Validation)
 * [`isFunction`](./isFunction.md)
 * [`isNone`](./isNone.md)
 * [`isNull`](./isNull.md)

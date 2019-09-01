@@ -4,7 +4,7 @@ Encapsulates a left value.
 
 ## Arguments
 
-* `value (*)`: A value.
+* `value (*)`: The value.
 
 ## Returns
 

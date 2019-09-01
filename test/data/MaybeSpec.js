@@ -48,21 +48,21 @@ describe("Maybe", () => {
     it("should throw exception for undefined", () => {
       expect(() => Maybe.fromJust()).to.throw(
         TypeError,
-        "maybe must not be undefined, null, or Nothing"
+        "maybe must not be Nothing"
       );
     });
 
     it("should throw exception for null", () => {
       expect(() => Maybe.fromJust(null)).to.throw(
         TypeError,
-        "maybe must not be undefined, null, or Nothing"
+        "maybe must not be Nothing"
       );
     });
 
     it("should throw exception for nothing", () => {
       expect(() => Maybe.fromJust(Maybe.Nothing())).to.throw(
         TypeError,
-        "maybe must not be undefined, null, or Nothing"
+        "maybe must not be Nothing"
       );
     });
 

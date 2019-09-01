@@ -3,7 +3,7 @@
 /**
  * Determines whether or not the {@code value} is {@code null}.
  *
- * @param {*} value - A value.
+ * @param {*} value - The value.
  * @return {Boolean} {@code true} if {@code null}; otherwise, {@code false}.
  */
 function isUndefined(value) {

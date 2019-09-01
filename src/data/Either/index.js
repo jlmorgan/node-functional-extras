@@ -9,6 +9,7 @@ const isLeft = require("./isLeft");
 const isRight = require("./isRight");
 const lefts = require("./lefts");
 const partitionEithers = require("./partitionEithers");
+const requireEither = require("./requireEither");
 const rights = require("./rights");
 
 module.exports = {
@@ -20,6 +21,7 @@ module.exports = {
   Left,
   lefts,
   partitionEithers,
+  requireEither,
   Right,
   rights
 };

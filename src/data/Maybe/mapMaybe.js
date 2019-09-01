@@ -3,8 +3,8 @@
 // Project
 const curry = require("../Tuple/curry");
 const fromJust = require("./fromJust");
-const isFunction = require("../../isFunction");
 const isJust = require("./isJust");
+const requireFunction = require("../Functions/requireFunction");
 
 /**
  * A version of {@code map} which can throw out elements. If the result of the function is {@code Nothing}, no element
@@ -17,12 +17,8 @@ const isJust = require("./isJust");
  * @throws {TypeError} if the {@code morphism} is {@code null}.
  */
 function mapMaybe(morphism, list) {
-  if (!isFunction(morphism)) {
-    throw new TypeError("morphism must be a Function");
-  }
-
   return (list || [])
-    .map(morphism)
+    .map(requireFunction(morphism, "morphism"))
     .filter(isJust)
     .map(fromJust);
 }
