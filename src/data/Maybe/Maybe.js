@@ -2,6 +2,7 @@
 
 // Project
 const isNone = require("../../isNone");
+const requireFunction = require("../Functions/requireFunction");
 
 /**
  * The {@link Maybe} type is a disjunction that wraps an arbitrary value. The {@link Maybe} {@code a} either contains a
@@ -20,73 +21,40 @@ class Maybe {
   }
 
   /**
+   * Determines whether or not the {@code other} has the same value as the current {@code instance}.
+   *
+   * @function
+   * @name Maybe#equals
+   * @param {*} other - The other object.
+   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
+   */
+
+  /**
+   * Tests the underlying value against the {@code predicate}, returning the {@code Just} of the value for {@code true};
+   * otherwise, {@code Nothing}.
+   *
+   * @function
+   * @name Maybe#filter
+   * @param {Function} predicate - The predicate with which to test the value.
+   * @return {Maybe} The {@code Just} of the value for {@code true}; otherwise, {@code Nothing}.
+   * @throws {TypeError} if the {@code predicate} is {@code null}.
+   */
+
+  /**
+   * Determines whether or not the {@link Maybe} is a {@code Just}.
+   *
+   * @function
+   * @name Maybe#isJust
+   * @return {Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
+   */
+
+  /**
    * Determines whether or not the {@link Maybe} is a {@code Nothing}.
    *
    * @return {Boolean} {@code true} for a {@code Nothing}; otherwise, {@code false}.
    */
   isNothing() {
     return !this.isJust();
-  }
-}
-
-/**
- * Encapsulates a non-null value.
- *
- * @extends Maybe
- */
-class Just extends Maybe {
-  constructor(value) {
-    super();
-
-    this._value = value;
-  }
-
-  /**
-   * Determines whether or not the {@code other} has the same value as the current {@code instance}.
-   *
-   * @param {*} other - The other object.
-   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
-   */
-  equals(other) {
-    return Maybe.isMaybe(other) &&
-      other.isJust() &&
-      other.valueOf() === this.valueOf();
-  }
-
-  /**
-   * Determines whether or not the {@link Maybe} is a {@code Just}.
-   *
-   * @return {Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
-   */
-  isJust() {
-    return true;
-  }
-
-  /**
-   * Converts the {@code instance} to a {@code JSON} representation.
-   *
-   * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
-   */
-  toJSON() {
-    return this._value;
-  }
-
-  /**
-   * Converts the {@code instance} to a {@code String} representation.
-   *
-   * @return {String} The {@code instance} as a {@code String}.
-   */
-  toString() {
-    return `Just(${this._value})`;
-  }
-
-  /**
-   * Returns the primitive value of the instance.
-   *
-   * @return {*} The primitive value.
-   */
-  valueOf() {
-    return this._value;
   }
 }
 
@@ -104,6 +72,17 @@ class Nothing extends Maybe {
    */
   equals(other) {
     return this === other;
+  }
+
+  /**
+   * Tests the underlying value against the {@code predicate}, returning the {@code Just} of the value for {@code true};
+   * otherwise, {@code Nothing}.
+   *
+   * @param {Function} predicate - The predicate with which to test the value.
+   * @return {Maybe} The {@code Just} of the value for {@code true}; otherwise, {@code Nothing}.
+   */
+  filter() {
+    return this;
   }
 
   /**
@@ -144,6 +123,79 @@ class Nothing extends Maybe {
 }
 
 const INSTANCE = new Nothing();
+
+/**
+ * Encapsulates a non-null value.
+ *
+ * @extends Maybe
+ */
+class Just extends Maybe {
+  constructor(value) {
+    super();
+
+    this._value = value;
+  }
+
+  /**
+   * Determines whether or not the {@code other} has the same value as the current {@code instance}.
+   *
+   * @param {*} other - The other object.
+   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
+   */
+  equals(other) {
+    return Maybe.isMaybe(other) &&
+      other.isJust() &&
+      other.valueOf() === this.valueOf();
+  }
+
+  /**
+   * Tests the underlying value against the {@code predicate}, returning the {@code Just} of the value for {@code true};
+   * otherwise, {@code Nothing}.
+   *
+   * @param {Function} predicate - The predicate with which to test the value.
+   * @return {Maybe} The {@code Just} of the value for {@code true}; otherwise, {@code Nothing}.
+   * @throws {TypeError} if the {@code predicate} is {@code null}.
+   */
+  filter(predicate) {
+    return requireFunction(predicate, "predicate")(this._value) ? this : INSTANCE;
+  }
+
+  /**
+   * Determines whether or not the {@link Maybe} is a {@code Just}.
+   *
+   * @return {Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
+   */
+  isJust() {
+    return true;
+  }
+
+  /**
+   * Converts the {@code instance} to a {@code JSON} representation.
+   *
+   * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
+   */
+  toJSON() {
+    return this._value;
+  }
+
+  /**
+   * Converts the {@code instance} to a {@code String} representation.
+   *
+   * @return {String} The {@code instance} as a {@code String}.
+   */
+  toString() {
+    return `Just(${this._value})`;
+  }
+
+  /**
+   * Returns the primitive value of the instance.
+   *
+   * @return {*} The primitive value.
+   */
+  valueOf() {
+    return this._value;
+  }
+}
 
 module.exports = {
   isMaybe: Maybe.isMaybe,

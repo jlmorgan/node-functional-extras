@@ -44,6 +44,52 @@ describe("Maybe", () => {
     });
   });
 
+  describe(".filter", () => {
+    const testPredicate = value => value % 2 === 0;
+
+    it("should throw exception for non-Function predicate", () => {
+      const testMaybe = Maybe.Just(0);
+
+      expect(() => Maybe.filter(null, testMaybe)).to.throw(
+        TypeError,
+        "predicate must be a Function"
+      );
+    });
+
+    it("should throw exception for non-Maybe maybe", () => {
+      const testMaybe = null;
+
+      expect(() => Maybe.filter(testPredicate, testMaybe)).to.throw(
+        TypeError,
+        "maybe must be a Maybe"
+      );
+    });
+
+    it("should return Just for true predicate", () => {
+      const testMaybe = Maybe.Just(0);
+      const expectedResult = testMaybe;
+      const actualResult = Maybe.filter(testPredicate)(testMaybe);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+
+    it("should return Nothing for false predicate", () => {
+      const testMaybe = Maybe.Just(1);
+      const expectedResult = Maybe.Nothing();
+      const actualResult = Maybe.filter(testPredicate)(testMaybe);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+
+    it("should return Nothing for Nothing", () => {
+      const testMaybe = Maybe.Nothing();
+      const expectedResult = testMaybe;
+      const actualResult = Maybe.filter(testPredicate)(testMaybe);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+  });
+
   describe(".fromJust", () => {
     it("should throw exception for undefined", () => {
       expect(() => Maybe.fromJust()).to.throw(
