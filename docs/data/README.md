@@ -37,6 +37,7 @@
     * [`.maybeMap`](./Maybe/static/maybeMap.md)
     * [`.maybeToList`](./Maybe/static/maybeToList.md)
     * [`#equals`](./Maybe/instance/equals.md)
+    * [`#filter](./Maybe/instance/filter.md)
     * [`#isJust`](./Maybe/instance/isJust.md)
     * [`#isNothing`](./Maybe/instance/isNothing.md)
     * [`#toJSON`](./Maybe/instance/toJSON.md)

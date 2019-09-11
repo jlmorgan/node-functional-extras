@@ -3,6 +3,7 @@
 // Project
 const { Just, Nothing } = require("./Maybe");
 const catMaybes = require("./catMaybes");
+const filter = require("./filter");
 const fromJust = require("./fromJust");
 const fromMaybe = require("./fromMaybe");
 const isJust = require("./isJust");
@@ -14,6 +15,7 @@ const maybeToList = require("./maybeToList");
 
 module.exports = {
   catMaybes,
+  filter,
   fromJust,
   fromMaybe,
   isJust,
