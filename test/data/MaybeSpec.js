@@ -375,6 +375,31 @@ describe("Maybe", () => {
     });
   });
 
+  describe(".of", () => {
+    it("should return Nothing for undefined", () => {
+      const expectedResult = Maybe.Nothing();
+      const actualResult = Maybe.of();
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+
+    it("should return Nothing for null", () => {
+      const testValue = null;
+      const expectedResult = Maybe.Nothing();
+      const actualResult = Maybe.of(testValue);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+
+    it("should return Just of value for some value", () => {
+      const testValue = 0;
+      const expectedResult = Maybe.Just(testValue);
+      const actualResult = Maybe.of(testValue);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+  });
+
   describe("Just", () => {
     const testValue = uuid();
     const testMaybe = Maybe.Just(testValue);
