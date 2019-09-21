@@ -12,6 +12,7 @@ const listToMaybe = require("./listToMaybe");
 const mapMaybe = require("./mapMaybe");
 const maybeMap = require("./maybeMap");
 const maybeToList = require("./maybeToList");
+const of = require("./of");
 
 module.exports = {
   catMaybes,
@@ -25,5 +26,6 @@ module.exports = {
   mapMaybe,
   maybeMap,
   maybeToList,
-  Nothing
+  Nothing,
+  of
 };
