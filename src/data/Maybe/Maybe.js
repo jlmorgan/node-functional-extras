@@ -41,6 +41,15 @@ class Maybe {
    */
 
   /**
+   * Maps the underlying value of a {@link Maybe} in a {@code null}-safe way.
+   *
+   * @function
+   * @name Maybe#fmap
+   * @param {Function} morphism - The morphism.
+   * @return {Maybe} The mapped {@link Maybe}.
+   */
+
+  /**
    * Determines whether or not the {@link Maybe} is a {@code Just}.
    *
    * @function
@@ -82,6 +91,16 @@ class Nothing extends Maybe {
    * @return {Maybe} The {@code Just} of the value for {@code true}; otherwise, {@code Nothing}.
    */
   filter() {
+    return this;
+  }
+
+  /**
+   * Maps the underlying value of a {@link Maybe} in a {@code null}-safe way.
+   *
+   * @param {Function} morphism - The morphism.
+   * @return {Maybe} The mapped {@link Maybe}.
+   */
+  fmap() {
     return this;
   }
 
@@ -161,6 +180,16 @@ class Just extends Maybe {
   }
 
   /**
+   * Maps the underlying value of a {@link Maybe} in a {@code null}-safe way.
+   *
+   * @param {Function} morphism - The morphism.
+   * @return {Maybe} The mapped {@link Maybe}.
+   */
+  fmap(morphism) {
+    return Maybe.of(requireFunction(morphism, "morphism")(this.valueOf()));
+  }
+
+  /**
    * Determines whether or not the {@link Maybe} is a {@code Just}.
    *
    * @return {Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
@@ -197,32 +226,49 @@ class Just extends Maybe {
   }
 }
 
+/**
+ * Creates a {@code Just} of the value.
+ *
+ * @constructor
+ * @param {*} value - A non-null value.
+ * @return {Maybe} The {@link Maybe} of the {@code value}.
+ * @throws {TypeError} if the {@code value} is {@code null} or {@code undefined}.
+ */
+Maybe.Just = function(value) {
+  if (isNone(value)) {
+    throw new TypeError("value must not be null or undefined");
+  }
+
+  return new Just(value);
+};
+
+/**
+ * Creates a nothing to represent {@code null} or a missing value.
+ *
+ * @constructor
+ * @return {Maybe} A {@code Nothing}.
+ */
+Maybe.Nothing = function() {
+  return INSTANCE;
+};
+
+/**
+ * Creates a {@link Maybe} of the {@code value} where:
+ *   - undefined -> Nothing
+ *   - null -> Nothing
+ *   - a -> Just(a)
+ *
+ * @param {*} value - The value.
+ * @return {Maybe} {@code Nothing} if the {@code value} is {@code null} or {@code undefined}; otherwise, {@code Just}
+ * of the {@code value}.
+ */
+Maybe.of = function of(value) {
+  return isNone(value) ? INSTANCE : Maybe.Just(value);
+};
+
 module.exports = {
   isMaybe: Maybe.isMaybe,
-
-  /**
-   * Creates a {@code Just} of the value.
-   *
-   * @constructor
-   * @param {*} value - A non-null value.
-   * @return {Maybe} The {@link Maybe} of the {@code value}.
-   * @throws {TypeError} if the {@code value} is {@code null} or {@code undefined}.
-   */
-  Just(value) {
-    if (isNone(value)) {
-      throw new TypeError("value must not be null or undefined");
-    }
-
-    return new Just(value);
-  },
-
-  /**
-   * Creates a nothing to represent {@code null} or a missing value.
-   *
-   * @constructor
-   * @return {Maybe} A {@code Nothing}.
-   */
-  Nothing() {
-    return INSTANCE;
-  }
+  Just: Maybe.Just,
+  Nothing: Maybe.Nothing,
+  of: Maybe.of
 };
