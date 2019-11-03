@@ -39,6 +39,7 @@
     * [`.of`](./Maybe/static/of.md)
     * [`#equals`](./Maybe/instance/equals.md)
     * [`#filter](./Maybe/instance/filter.md)
+    * [`#fmap](./Maybe/instance/fmap.md)
     * [`#isJust`](./Maybe/instance/isJust.md)
     * [`#isNothing`](./Maybe/instance/isNothing.md)
     * [`#toJSON`](./Maybe/instance/toJSON.md)

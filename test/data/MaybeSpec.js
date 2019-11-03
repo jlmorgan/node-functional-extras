@@ -90,6 +90,53 @@ describe("Maybe", () => {
     });
   });
 
+  describe(".fmap", () => {
+    const testMorphism = list => list[0];
+
+    it("should throw exception for non-Function morphism", () => {
+      const testMaybe = Maybe.Just(0);
+
+      expect(() => Maybe.fmap(null, testMaybe)).to.throw(
+        TypeError,
+        "morphism must be a Function"
+      );
+    });
+
+    it("should throw exception for non-Maybe maybe", () => {
+      const testMaybe = null;
+
+      expect(() => Maybe.fmap(testMorphism, testMaybe)).to.throw(
+        TypeError,
+        "maybe must be a Maybe"
+      );
+    });
+
+    it("should map the underlying value", () => {
+      const testValue = [uuid()];
+      const testMaybe = Maybe.Just(testValue);
+      const expectedResult = Maybe.Just(testValue[0]);
+      const actualResult = Maybe.fmap(testMorphism)(testMaybe);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+
+    it("should return Nothing for null return value", () => {
+      const testMaybe = Maybe.Just([null]);
+      const expectedResult = Maybe.Nothing();
+      const actualResult = Maybe.fmap(testMorphism)(testMaybe);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+
+    it("should return Nothing for Nothing", () => {
+      const testMaybe = Maybe.Nothing();
+      const expectedResult = Maybe.Nothing();
+      const actualResult = Maybe.fmap(testMorphism)(testMaybe);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+  });
+
   describe(".fromJust", () => {
     it("should throw exception for undefined", () => {
       expect(() => Maybe.fromJust()).to.throw(
