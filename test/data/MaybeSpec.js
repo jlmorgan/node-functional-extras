@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-
 "use strict";
 
 // Third Party
@@ -9,7 +7,6 @@ const uuid = require("uuid/v4");
 // Project
 const { isSome, Maybe } = require("../..");
 
-/* eslint-disable max-lines-per-function */
 describe("Maybe", () => {
   describe(".catMaybes", () => {
     it("should return empty list for null list", () => {

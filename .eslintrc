@@ -5,8 +5,27 @@
     "node": true
   },
   "extends": "eslint:recommended",
+  "overrides": [
+    {
+      "files": ["*config.js"],
+      "rules": {
+        "no-undefined": "off",
+        "no-process-env": "off"
+      }
+    },
+    {
+      "files": ["*Spec.js", "*.spec.js", "*.test.js"],
+      "rules": {
+        "max-lines": "off",
+        "max-lines-per-function": "off",
+        "no-invalid-this": "off",
+        "no-undefined": "off",
+        "no-unused-expressions": "off"
+      }
+    }
+  ],
   "parserOptions": {
-    "ecmaVersion": 8
+    "ecmaVersion": 2017
   },
   "rules": {
     "accessor-pairs": "off",
@@ -79,7 +98,7 @@
       "never"
     ],
     "consistent-return": "error",
-    "consistent-this": "off",
+    "consistent-this": "error",
     "constructor-super": "error",
     "curly": "error",
     "default-case": "error",
@@ -184,7 +203,7 @@
         "exceptAfterSingleLine": true
       }
     ],
-    "max-classes-per-file": "off",
+    "max-classes-per-file": ["error", 3],
     "max-depth": [
       "error",
       4
@@ -246,20 +265,7 @@
     "new-cap": [
       "error",
       {
-        "capIsNewExceptions": [
-          "A",
-          "D",
-          "Either",
-          "F",
-          "Failure",
-          "Just",
-          "Left",
-          "Maybe",
-          "Nothing",
-          "Right",
-          "Success",
-          "Validation"
-        ]
+        "capIsNew": false
       }
     ],
     "new-parens": "error",
@@ -431,7 +437,7 @@
     "no-useless-return": "error",
     "no-var": "error",
     "no-void": "warn",
-    "no-warning-comments": "warn",
+    "no-warning-comments": "off",
     "no-whitespace-before-property": "error",
     "no-with": "error",
     "nonblock-statement-body-position": "error",
@@ -543,7 +549,18 @@
     "radix": "error",
     "require-atomic-updates": "error",
     "require-await": "error",
-    "require-jsdoc": "off",
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "ArrowFunctionExpression": false,
+          "ClassDeclaration": true,
+          "FunctionDeclaration": true,
+          "FunctionExpression": false,
+          "MethodDefinition": true
+        }
+      }
+    ],
     "require-unicode-regexp": "warn",
     "require-yield": "error",
     "rest-spread-spacing": "error",

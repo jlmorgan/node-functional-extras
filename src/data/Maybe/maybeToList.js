@@ -5,7 +5,7 @@ const fromJust = require("./fromJust");
 const isJust = require("./isJust");
 
 /**
- * Returns an empty list for {@code Nothing}; otherwise, a singleton list of the underlying value of the {@code Just}.
+ * An empty list for {@code Nothing}; otherwise, a singleton list of the underlying value of the {@code Just}.
  *
  * @memberof Maybe
  * @param {Maybe} maybe - The {@link Maybe}.

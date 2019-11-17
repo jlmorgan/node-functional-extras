@@ -10,6 +10,7 @@ A finite ordered sequence of elements.
     * [`.curry`](./static/curry.md)
     * [`.curryN`](./static/curryN.md)
     * [`.isTuple`](./static/isTuple.md)
+    * [`.tupleMap`](./static/tupleMap.md)
 * [Instance Methods](./instance)
     * [`#equals`](./instance/equals.md)
     * [`#first`](./instance/first.md)
