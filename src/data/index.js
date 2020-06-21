@@ -4,6 +4,7 @@
 const Arrays = require("./Arrays");
 const Either = require("./Either");
 const Functions = require("./Functions");
+const Lists = require("./Lists");
 const Maybe = require("./Maybe");
 const Tuple = require("./Tuple");
 const Validation = require("./Validation");
@@ -13,8 +14,9 @@ module.exports = Object.assign(
   {},
   { Arrays: Arrays },
   { Either: Either },
-  Functions,
+  { Lists: Lists },
   { Maybe: Maybe },
   { Tuple: Tuple },
-  { Validation: Validation }
+  { Validation: Validation },
+  Functions
 );

@@ -149,6 +149,11 @@ const INSTANCE = new Nothing();
  * @extends Maybe
  */
 class Just extends Maybe {
+  /**
+   * Creates a {@code Just} of a {@code value}.
+   *
+   * @param {*} value - The value.
+   */
   constructor(value) {
     super();
 

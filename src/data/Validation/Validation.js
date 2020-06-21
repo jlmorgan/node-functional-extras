@@ -36,6 +36,9 @@ class Validation {
  * @extends Validation
  */
 class Failure extends Validation {
+  /**
+   * @param {*} values - Failure values.
+   */
   constructor(values) {
     super();
 
@@ -97,6 +100,9 @@ class Failure extends Validation {
  * @extends Validation
  */
 class Success extends Validation {
+  /**
+   * @param {*} value - Success value.
+   */
   constructor(value) {
     super();
 

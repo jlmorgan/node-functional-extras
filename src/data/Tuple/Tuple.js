@@ -14,6 +14,10 @@ class Tuple {
     return value instanceof Tuple;
   }
 
+  /**
+   * @param {*} first - First value.
+   * @param {*} second - Second value.
+   */
   constructor(first, second) {
     this._first = first;
     this._second = second;

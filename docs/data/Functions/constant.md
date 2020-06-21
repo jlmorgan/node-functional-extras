@@ -8,7 +8,7 @@ The `K` combinator. Creates a unary function that ignores the input value and re
 
 ## Returns
 
-* `(Function)`: Returns a unary function that takes a value and returns the original value.
+* `(Function)`: A unary function that takes a value and returns the original value.
 
 ## Example
 

@@ -9,7 +9,7 @@ Composes two functions `f` before `g`.
 
 ## Returns
 
-* `(Function)`: Returns a function that maps a value of `a` to `c`.
+* `(Function)`: A function that maps a value of `a` to `c`.
 
 ## Example
 

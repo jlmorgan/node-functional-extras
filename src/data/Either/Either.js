@@ -32,6 +32,9 @@ class Either {
  * @extends Either
  */
 class Left extends Either {
+  /**
+   * @param {*} value - Left value.
+   */
   constructor(value) {
     super();
 
@@ -93,6 +96,9 @@ class Left extends Either {
  * @extends Either
  */
 class Right extends Either {
+  /**
+   * @param {*} value - Right value.
+   */
   constructor(value) {
     super();
 

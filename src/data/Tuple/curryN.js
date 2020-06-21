@@ -7,7 +7,6 @@ const curry = require("./curry");
  * Creates a variadic curried function.
  *
  * @private
- * @memberof Tuple
  * @param {Array} collected - Collected arguments.
  * @param {Number} length - The number of arguments to collect.
  * @param {Function} f - The function to curry.

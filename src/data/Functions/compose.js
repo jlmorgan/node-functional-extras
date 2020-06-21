@@ -9,7 +9,7 @@ const curry = require("../Tuple/curry");
  * @memberof Functions
  * @param {Function} g - The second function.
  * @param {Function} f - The first function.
- * @return {Function} Returns a function that maps a value {@code a} to {@code c}.
+ * @return {Function} A function that maps a value {@code a} to {@code c}.
  */
 function compose(g, f) {
   return x => g(f(x));

@@ -7,7 +7,6 @@ const uuid = require("uuid/v4");
 // Project
 const { Tuple } = require("../..");
 
-/* eslint-disable max-lines-per-function */
 describe("Tuple", () => {
   const testFirstValue = uuid();
   const testSecondValue = uuid();
@@ -16,14 +15,14 @@ describe("Tuple", () => {
     it("should return false for non-Tuple", () => {
       const actualResult = Tuple.isTuple(testFirstValue);
 
-      expect(actualResult).to.be.false; // eslint-disable-line no-unused-expressions
+      expect(actualResult).to.be.false;
     });
 
     it("should return true for Tuple", () => {
       const testTuple = Tuple.of(testFirstValue, testSecondValue);
       const actualResult = Tuple.isTuple(testTuple);
 
-      expect(actualResult).to.be.true; // eslint-disable-line no-unused-expressions
+      expect(actualResult).to.be.true;
     });
   });
 
@@ -36,46 +35,82 @@ describe("Tuple", () => {
     });
   });
 
+  describe(".tupleMap", () => {
+    const randomInt = () => Math.ceil(Math.random() * 10); // eslint-disable-line no-magic-numbers
+
+    it("should throw an error if the first morphism is not a Function", () => {
+      const testFirstMorphism = 0;
+      const testSecondMorphism = value => value + 2;
+      const testValue = randomInt();
+      const expectedError = TypeError;
+      const expectedMessage = "firstMorphism must be a Function";
+
+      expect(() => Tuple.tupleMap(testFirstMorphism)(testSecondMorphism)(testValue))
+        .to.throw(expectedError, expectedMessage);
+    });
+
+    it("should throw an error if the second morphism is not a Function", () => {
+      const testFirstMorphism = value => value + 1;
+      const testSecondMorphism = 0;
+      const testValue = randomInt();
+      const expectedError = TypeError;
+      const expectedMessage = "secondMorphism must be a Function";
+
+      expect(() => Tuple.tupleMap(testFirstMorphism)(testSecondMorphism)(testValue))
+        .to.throw(expectedError, expectedMessage);
+    });
+
+    it("should return a tuple of the mapped values", () => {
+      const testFirstMorphism = value => value + 1;
+      const testSecondMorphism = value => value + 2;
+      const testValue = randomInt();
+      const expectedResult = Tuple.of(testValue + 1, testValue + 2);
+      const actualResult = Tuple.tupleMap(testFirstMorphism)(testSecondMorphism)(testValue);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+  });
+
   describe("#equals", () => {
     it("should return false for differing first values", () => {
       const testTuple1 = Tuple.of(uuid(), testSecondValue);
       const testTuple2 = Tuple.of(uuid(), testSecondValue);
 
-      expect(testTuple1.equals(testTuple2)).to.be.false; // eslint-disable-line no-unused-expressions
+      expect(testTuple1.equals(testTuple2)).to.be.false;
     });
 
     it("should return false for differing second values", () => {
       const testTuple1 = Tuple.of(testFirstValue, uuid());
       const testTuple2 = Tuple.of(testFirstValue, uuid());
 
-      expect(testTuple1.equals(testTuple2)).to.be.false; // eslint-disable-line no-unused-expressions
+      expect(testTuple1.equals(testTuple2)).to.be.false;
     });
 
     it("should return false for differing type", () => {
       const testTuple1 = Tuple.of(testFirstValue, uuid());
       const testOther = {};
 
-      expect(testTuple1.equals(testOther)).to.be.false; // eslint-disable-line no-unused-expressions
+      expect(testTuple1.equals(testOther)).to.be.false;
     });
 
     it("should return false for null", () => {
       const testTuple = Tuple.of(testFirstValue, uuid());
       const testOther = null;
 
-      expect(testTuple.equals(testOther)).to.be.false; // eslint-disable-line no-unused-expressions
+      expect(testTuple.equals(testOther)).to.be.false;
     });
 
     it("should return true for same instance", () => {
       const testTuple = Tuple.of(testFirstValue, uuid());
 
-      expect(testTuple.equals(testTuple)).to.be.true; // eslint-disable-line no-unused-expressions
+      expect(testTuple.equals(testTuple)).to.be.true;
     });
 
     it("should return true for same values", () => {
       const testTuple1 = Tuple.of(testFirstValue, testSecondValue);
       const testTuple2 = Tuple.of(testFirstValue, testSecondValue);
 
-      expect(testTuple1.equals(testTuple2)).to.be.true; // eslint-disable-line no-unused-expressions
+      expect(testTuple1.equals(testTuple2)).to.be.true;
     });
   });
 
