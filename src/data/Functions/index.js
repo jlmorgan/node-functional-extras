@@ -1,6 +1,7 @@
 "use strict";
 
 // Project
+const bind = require("./bind");
 const compose = require("./compose");
 const constant = require("./constant");
 const flip = require("./flip");
@@ -11,6 +12,7 @@ const pipe = require("./pipe");
 const requireFunction = require("./requireFunction");
 
 module.exports = {
+  bind,
   compose,
   constant,
   flip,
