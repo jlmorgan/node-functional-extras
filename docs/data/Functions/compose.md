@@ -18,7 +18,7 @@ Composes two functions `g` after `f`.
 ## Example
 
 ```javascript
-const add = a => b => a + 1;
+const add = a => b => a + b;
 const square = a => a * a;
 const decrementAndSquare = compose(square, add(-1));
 const incrementAndSquare = compose(square)(add(1));

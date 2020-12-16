@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+* [`.bind`](./bind.md)
 * [`.compose`](./compose.md)
 * [`.constant`](./constant.md)
 * [`.flip`](./flip.md)
