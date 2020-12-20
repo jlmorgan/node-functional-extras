@@ -9,7 +9,7 @@ const isSome = require("../../isSome");
  *
  * @memberof Maybe
  * @param {Array} list - The {@code list} of values.
- * @return {Maybe} A {@code Just} of the first non-null value; otherwise, {@code Nothing}.
+ * @return {!Maybe} A {@code Just} of the first non-null value; otherwise, {@code Nothing}.
  */
 function listToMaybe(list) {
   const value = Array.isArray(list) ?

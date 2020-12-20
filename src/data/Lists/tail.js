@@ -8,7 +8,7 @@ const requireNonEmpty = require("./requireNonEmpty");
  *
  * @memberof Lists
  * @param {!Array} list - The list.
- * @return {Array} Elements in the list excluding the first.
+ * @return {!Array} Elements in the list excluding the first.
  * @throws {TypeError} if the {@code list} is not a non-empty {@code Array}.
  */
 function tail(list) {

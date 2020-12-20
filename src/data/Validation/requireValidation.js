@@ -8,9 +8,9 @@ const requireType = require("../../requireType");
 /**
  * Throws a {@link TypeError} if the {@code value} provided is not a {@code Validation}.
  *
- * @function requireValidation
+ * @memberof Validation
  * @param {*} value - The value to require.
- * @param {String} name - The variable name.
+ * @param {!String} name - The variable name.
  * @return {*} The value.
  */
 function requireValidation(value, name) {

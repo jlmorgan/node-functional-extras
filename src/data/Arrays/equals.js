@@ -8,6 +8,7 @@ const requireArray = require("./requireArray");
  * Shallow compares the contents of two arrays in order.
  *
  * @private
+ * @memberof Arrays
  * @param {Array} second - Array to compare.
  * @param {Array} first - Array to compare.
  * @return {Boolean}
@@ -21,6 +22,7 @@ function safeIsEqual(second, first) {
 /**
  * Shallow compares the contents of two arrays in order.
  *
+ * @memberof Arrays
  * @param {Array} second - Array to compare.
  * @param {Array} first - Array to compare.
  * @return {Boolean} {@code true} if the arrays are equal; otherwise, {@code false}.

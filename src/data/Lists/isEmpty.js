@@ -9,7 +9,7 @@ const length = require("./length");
  *
  * @memberof Lists
  * @param {Array} list - The list.
- * @return {Boolean} {@code true} for an empty; otherwise, {@code false}.
+ * @return {!Boolean} {@code true} for an empty; otherwise, {@code false}.
  */
 function isEmpty(list) {
   return Maybe.of(list)

@@ -7,8 +7,9 @@ const curry = require("../Tuple/curry");
 /**
  * Extracts the value of a {@code Left}; otherwise, returns the {@code defaultValue}.
  *
+ * @memberof Either
  * @param {*} defaultValue - Value used if the {@code either} is not a {@code Left}.
- * @param {Either} either - The {@link Either}.
+ * @param {!Either} either - The {@link Either}.
  * @return {*} The underlying left value or default.
  */
 function fromLeft(defaultValue, either) {

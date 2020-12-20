@@ -8,7 +8,7 @@ const Either = require("./Either");
  *
  * @memberof Either
  * @param {*} value - The value.
- * @return {Boolean} {@code true} for a {@code Right}; otherwise, {@code false}.
+ * @return {!Boolean} {@code true} for a {@code Right}; otherwise, {@code false}.
  */
 function isRight(value) {
   return Either.isEither(value) && value.isRight();

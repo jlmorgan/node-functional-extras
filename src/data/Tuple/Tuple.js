@@ -8,7 +8,7 @@ class Tuple {
    * Determines whether or not the {@code value} is a {@link Tuple}.
    *
    * @param {*} value - The value to test.
-   * @return {Boolean} `true` if a {@link Tuple}; otherwise, `false`.
+   * @return {!Boolean} `true` if a {@link Tuple}; otherwise, `false`.
    */
   static isTuple(value) {
     return value instanceof Tuple;
@@ -27,7 +27,7 @@ class Tuple {
    * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
-   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for equality; otherwise, {@code false}.
    */
   equals(other) {
     return this === other || ( // eslint-disable-line no-extra-parens
@@ -58,7 +58,7 @@ class Tuple {
   /**
    * Creates a new {@link Tuple} with swapped values.
    *
-   * @return {Tuple} The swapped {@link Tuple}.
+   * @return {!Tuple} The swapped {@link Tuple}.
    */
   swap() {
     return new Tuple(this.second(), this.first());
@@ -78,7 +78,7 @@ class Tuple {
   /**
    * Converts the {@code instance} to a {@code String} representation.
    *
-   * @return {String} The {@code instance} as a {@code String}.
+   * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
     return `Tuple(${this.first()}, ${this.second()})`;

@@ -7,6 +7,7 @@ const requireArray = require("./requireArray");
 /**
  * Concatenates two arrays.
  *
+ * @memberof Arrays
  * @param {Array} second - Array to compare.
  * @param {Array} first - Array to compare.
  * @return {Array} The concatenated array.

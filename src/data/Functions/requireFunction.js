@@ -9,7 +9,7 @@ const requireType = require("../../requireType");
  * Throws a {@link TypeError} if the {@code value} provided is not an {@link Function}.
  *
  * @param {*} value - The value to require.
- * @param {String} name - The variable name.
+ * @param {!String} name - The variable name.
  * @return {*} The value.
  */
 function requireFunction(value, name) {

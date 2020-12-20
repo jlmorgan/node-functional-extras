@@ -10,7 +10,7 @@ class Either {
    * Determines whether or not the {@code value} is a {@link Either}.
    *
    * @param {*} value - The value.
-   * @return {Boolean} {@code true} for a {@link Either}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@link Either}; otherwise, {@code false}.
    */
   static isEither(value) {
     return value instanceof Either;
@@ -19,7 +19,7 @@ class Either {
   /**
    * Determines whether or not the {@link Either} is a {@code Left}.
    *
-   * @return {Boolean} {@code true} for a {@code Left}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Left}; otherwise, {@code false}.
    */
   isLeft() {
     return !this.isRight();
@@ -45,7 +45,7 @@ class Left extends Either {
    * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
-   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for equality; otherwise, {@code false}.
    */
   equals(other) {
     return Either.isEither(other) &&
@@ -56,7 +56,7 @@ class Left extends Either {
   /**
    * Determines whether or not the {@link Either} is a {@code Right}.
    *
-   * @return {Boolean} {@code true} for a {@code Right}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Right}; otherwise, {@code false}.
    */
   isRight() {
     return false;
@@ -74,7 +74,7 @@ class Left extends Either {
   /**
    * Converts the {@code instance} to a {@code String} representation.
    *
-   * @return {String} The {@code instance} as a {@code String}.
+   * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
     return `Left(${this._value})`;
@@ -109,7 +109,7 @@ class Right extends Either {
    * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
-   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for equality; otherwise, {@code false}.
    */
   equals(other) {
     return Either.isEither(other) &&
@@ -120,7 +120,7 @@ class Right extends Either {
   /**
    * Determines whether or not the {@link Either} is a {@code Right}.
    *
-   * @return {Boolean} {@code true} for a {@code Right}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Right}; otherwise, {@code false}.
    */
   isRight() {
     return true;
@@ -138,7 +138,7 @@ class Right extends Either {
   /**
    * Converts the {@code instance} to a {@code String} representation.
    *
-   * @return {String} The {@code instance} as a {@code String}.
+   * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
     return `Right(${this._value})`;
@@ -162,7 +162,7 @@ module.exports = {
    *
    * @constructor
    * @param {*} value - The value.
-   * @return {Either} A {@code Left} of the value.
+   * @return {!Either} A {@code Left} of the value.
    */
   Left(value) {
     return new Left(value);
@@ -173,7 +173,7 @@ module.exports = {
    *
    * @constructor
    * @param {*} value - The value.
-   * @return {Either} A {@code Right} of the value.
+   * @return {!Either} A {@code Right} of the value.
    */
   Right(value) {
     return new Right(value);

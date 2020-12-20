@@ -14,7 +14,7 @@ class Validation {
    * Determines whether or not the {@code value} is a {@link Validation}.
    *
    * @param {*} value - The value.
-   * @return {Boolean} {@code true} for a {@link Validation}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@link Validation}; otherwise, {@code false}.
    */
   static isValidation(value) {
     return value instanceof Validation;
@@ -23,7 +23,7 @@ class Validation {
   /**
    * Determines whether or not the {@link Validation} is a {@code Failure}.
    *
-   * @return {Boolean} {@code true} for a {@code Left}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Left}; otherwise, {@code false}.
    */
   isFailure() {
     return !this.isSuccess();
@@ -49,7 +49,7 @@ class Failure extends Validation {
    * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
-   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for equality; otherwise, {@code false}.
    */
   equals(other) {
     return Validation.isValidation(other) &&
@@ -60,7 +60,7 @@ class Failure extends Validation {
   /**
    * Determines whether or not the {@link Validation} is a {@code Failure}.
    *
-   * @return {Boolean} {@code true} for a {@code Failure}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Failure}; otherwise, {@code false}.
    */
   isSuccess() {
     return false;
@@ -78,7 +78,7 @@ class Failure extends Validation {
   /**
    * Converts the {@code instance} to a {@code String} representation.
    *
-   * @return {String} The {@code instance} as a {@code String}.
+   * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
     return `Failure([${this._values.join(",")}])`;
@@ -113,7 +113,7 @@ class Success extends Validation {
    * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
-   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for equality; otherwise, {@code false}.
    */
   equals(other) {
     return Validation.isValidation(other) &&
@@ -124,7 +124,7 @@ class Success extends Validation {
   /**
    * Determines whether or not the {@link Validation} is a {@code Success}.
    *
-   * @return {Boolean} {@code true} for a {@code Success}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Success}; otherwise, {@code false}.
    */
   isSuccess() {
     return true;
@@ -142,7 +142,7 @@ class Success extends Validation {
   /**
    * Converts the {@code instance} to a {@code String} representation.
    *
-   * @return {String} The {@code instance} as a {@code String}.
+   * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
     return `Success(${this._value})`;
@@ -164,7 +164,7 @@ module.exports = {
    *
    * @constructor
    * @param {*} value - The value.
-   * @return {Either} A {@code Failure} of the value.
+   * @return {!Either} A {@code Failure} of the value.
    */
   Failure(value) {
     return new Failure(value);
@@ -177,7 +177,7 @@ module.exports = {
    *
    * @constructor
    * @param {*} value - The value.
-   * @return {Either} A {@code Success} of the value.
+   * @return {!Either} A {@code Success} of the value.
    */
   Success(value) {
     return new Success(value);

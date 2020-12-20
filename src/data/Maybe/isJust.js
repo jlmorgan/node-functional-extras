@@ -8,7 +8,7 @@ const Maybe = require("./Maybe");
  *
  * @memberof Maybe
  * @param {*} value - The value.
- * @return {Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
+ * @return {!Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
  */
 function isJust(value) {
   return Maybe.isMaybe(value) && value.isJust();

@@ -4,7 +4,7 @@
  * Creates an empty list.
  *
  * @memberof Lists
- * @return {Array} The empty list.
+ * @return {!Array} The empty list.
  */
 function empty() {
   return [];

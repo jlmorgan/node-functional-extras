@@ -9,9 +9,11 @@ const requireValidation = require("./requireValidation");
 /**
  * Concatenates two {@code Failure} values together, replace a {@code Success} with the {@code Failure}; otherwise,
  * take the first {@code Success}.
- * @param {Validation} second - The second {@link Validation}.
- * @param {Validation} first - The first {@link Validation}.
- * @return {Validation} The first {@code Success} for two successes, the first {@code Failure} for mixed; otherwise, a
+ *
+ * @memberof Validation
+ * @param {!Validation} second - The second {@link Validation}.
+ * @param {!Validation} first - The first {@link Validation}.
+ * @return {!Validation} The first {@code Success} for two successes, the first {@code Failure} for mixed; otherwise, a
  * {@code Failure} of the concatenation of the failure values.
  * @throws {TypeError} if the either value is not a {@link Validation}.
  */

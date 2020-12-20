@@ -14,7 +14,7 @@ class Maybe {
    * Determines whether or not the {@code value} is a {@link Maybe}.
    *
    * @param {*} value - The value.
-   * @return {Boolean} {@code true} for a {@link Maybe}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@link Maybe}; otherwise, {@code false}.
    */
   static isMaybe(value) {
     return value instanceof Maybe;
@@ -26,7 +26,7 @@ class Maybe {
    * @function
    * @name Maybe#equals
    * @param {*} other - The other object.
-   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for equality; otherwise, {@code false}.
    */
 
   /**
@@ -35,8 +35,8 @@ class Maybe {
    *
    * @function
    * @name Maybe#filter
-   * @param {Function} predicate - The predicate with which to test the value.
-   * @return {Maybe} The {@code Just} of the value for {@code true}; otherwise, {@code Nothing}.
+   * @param {!Function} predicate - The predicate with which to test the value.
+   * @return {!Maybe} The {@code Just} of the value for {@code true}; otherwise, {@code Nothing}.
    * @throws {TypeError} if the {@code predicate} is {@code null}.
    */
 
@@ -45,8 +45,8 @@ class Maybe {
    *
    * @function
    * @name Maybe#fmap
-   * @param {Function} morphism - The morphism.
-   * @return {Maybe} The mapped {@link Maybe}.
+   * @param {!Function} morphism - The morphism.
+   * @return {!Maybe} The mapped {@link Maybe}.
    */
 
   /**
@@ -54,13 +54,13 @@ class Maybe {
    *
    * @function
    * @name Maybe#isJust
-   * @return {Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
    */
 
   /**
    * Determines whether or not the {@link Maybe} is a {@code Nothing}.
    *
-   * @return {Boolean} {@code true} for a {@code Nothing}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Nothing}; otherwise, {@code false}.
    */
   isNothing() {
     return !this.isJust();
@@ -77,7 +77,7 @@ class Nothing extends Maybe {
    * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
-   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for equality; otherwise, {@code false}.
    */
   equals(other) {
     return this === other;
@@ -87,8 +87,8 @@ class Nothing extends Maybe {
    * Tests the underlying value against the {@code predicate}, returning the {@code Just} of the value for {@code true};
    * otherwise, {@code Nothing}.
    *
-   * @param {Function} predicate - The predicate with which to test the value.
-   * @return {Maybe} The {@code Just} of the value for {@code true}; otherwise, {@code Nothing}.
+   * @param {!Function} predicate - The predicate with which to test the value.
+   * @return {!Maybe} The {@code Just} of the value for {@code true}; otherwise, {@code Nothing}.
    */
   filter() {
     return this;
@@ -97,8 +97,8 @@ class Nothing extends Maybe {
   /**
    * Maps the underlying value of a {@link Maybe} in a {@code null}-safe way.
    *
-   * @param {Function} morphism - The morphism.
-   * @return {Maybe} The mapped {@link Maybe}.
+   * @param {!Function} morphism - The morphism.
+   * @return {!Maybe} The mapped {@link Maybe}.
    */
   fmap() {
     return this;
@@ -107,7 +107,7 @@ class Nothing extends Maybe {
   /**
    * Determines whether or not the {@link Maybe} is a {@code Just}.
    *
-   * @return {Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
    */
   isJust() {
     return false;
@@ -125,7 +125,7 @@ class Nothing extends Maybe {
   /**
    * Converts the {@code instance} to a {@code String} representation.
    *
-   * @return {String} The {@code instance} as a {@code String}.
+   * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
     return "Nothing()";
@@ -164,7 +164,7 @@ class Just extends Maybe {
    * Determines whether or not the {@code other} has the same value as the current {@code instance}.
    *
    * @param {*} other - The other object.
-   * @return {Boolean} {@code true} for equality; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for equality; otherwise, {@code false}.
    */
   equals(other) {
     return Maybe.isMaybe(other) &&
@@ -176,8 +176,8 @@ class Just extends Maybe {
    * Tests the underlying value against the {@code predicate}, returning the {@code Just} of the value for {@code true};
    * otherwise, {@code Nothing}.
    *
-   * @param {Function} predicate - The predicate with which to test the value.
-   * @return {Maybe} The {@code Just} of the value for {@code true}; otherwise, {@code Nothing}.
+   * @param {!Function} predicate - The predicate with which to test the value.
+   * @return {!Maybe} The {@code Just} of the value for {@code true}; otherwise, {@code Nothing}.
    * @throws {TypeError} if the {@code predicate} is {@code null}.
    */
   filter(predicate) {
@@ -187,8 +187,8 @@ class Just extends Maybe {
   /**
    * Maps the underlying value of a {@link Maybe} in a {@code null}-safe way.
    *
-   * @param {Function} morphism - The morphism.
-   * @return {Maybe} The mapped {@link Maybe}.
+   * @param {!Function} morphism - The morphism.
+   * @return {!Maybe} The mapped {@link Maybe}.
    */
   fmap(morphism) {
     return Maybe.of(requireFunction(morphism, "morphism")(this.valueOf()));
@@ -197,7 +197,7 @@ class Just extends Maybe {
   /**
    * Determines whether or not the {@link Maybe} is a {@code Just}.
    *
-   * @return {Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Just}; otherwise, {@code false}.
    */
   isJust() {
     return true;
@@ -215,7 +215,7 @@ class Just extends Maybe {
   /**
    * Converts the {@code instance} to a {@code String} representation.
    *
-   * @return {String} The {@code instance} as a {@code String}.
+   * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
     return `Just(${this._value})`;
@@ -236,7 +236,7 @@ class Just extends Maybe {
  *
  * @constructor
  * @param {*} value - A non-null value.
- * @return {Maybe} The {@link Maybe} of the {@code value}.
+ * @return {!Maybe} The {@link Maybe} of the {@code value}.
  * @throws {TypeError} if the {@code value} is {@code null} or {@code undefined}.
  */
 Maybe.Just = function(value) {
@@ -251,7 +251,7 @@ Maybe.Just = function(value) {
  * Creates a nothing to represent {@code null} or a missing value.
  *
  * @constructor
- * @return {Maybe} A {@code Nothing}.
+ * @return {!Maybe} A {@code Nothing}.
  */
 Maybe.Nothing = function() {
   return INSTANCE;
@@ -264,7 +264,7 @@ Maybe.Nothing = function() {
  *   - a -> Just(a)
  *
  * @param {*} value - The value.
- * @return {Maybe} {@code Nothing} if the {@code value} is {@code null} or {@code undefined}; otherwise, {@code Just}
+ * @return {!Maybe} {@code Nothing} if the {@code value} is {@code null} or {@code undefined}; otherwise, {@code Just}
  * of the {@code value}.
  */
 Maybe.of = function of(value) {

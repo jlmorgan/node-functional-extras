@@ -5,7 +5,7 @@
  *
  * @memberof Functions
  * @param {*} a - The return value of the unary function.
- * @return {Function} A unary function that takes a value and returns the original value.
+ * @return {!Function} A unary function that takes a value and returns the original value.
  */
 function constant(a) {
   return () => a;

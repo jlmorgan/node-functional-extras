@@ -13,7 +13,7 @@ const tupleMap = require("../Tuple/tupleMap");
  *
  * @memberof Lists
  * @param {Array} list - The list.
- * @return {Maybe} {@code Just} of the head and tail; otherwise, {@code Nothing}.
+ * @return {!Maybe} {@code Just} of the head and tail; otherwise, {@code Nothing}.
  */
 function uncons(list) {
   return of(list)

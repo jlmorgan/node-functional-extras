@@ -7,9 +7,9 @@ const requireType = require("../../requireType");
 /**
  * Throws a {@link TypeError} if the {@code value} provided is not an {@link Array}.
  *
- * @function requireArray
+ * @memberof Arrays
  * @param {*} value - The value to require.
- * @param {String} name - The variable name.
+ * @param {!String} name - The variable name.
  * @return {*} The value.
  */
 function requireArray(value, name) {

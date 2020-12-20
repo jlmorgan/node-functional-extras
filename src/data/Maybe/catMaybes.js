@@ -9,7 +9,7 @@ const fromJust = require("./fromJust");
  *
  * @memberof Maybe
  * @param {Maybe[]} list - List of {@link Maybe}.
- * @return {Array} A list of the {@code Just} values.
+ * @return {!Array} A list of the {@code Just} values.
  */
 function catMaybes(list) {
   return (list || [])

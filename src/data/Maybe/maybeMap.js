@@ -12,9 +12,9 @@ const requireFunction = require("../Functions/requireFunction");
  *
  * @memberof Maybe
  * @param {*} defaultValue - The value to use if the {@code maybe} is {@code null} or {@code Nothing}.
- * @param {Function} morphism - The function to map the underlying value of the {@code maybe} to the same type as the
+ * @param {!Function} morphism - The function to map the underlying value of the {@code maybe} to the same type as the
  * return type.
- * @param {Maybe} value - The {@link Maybe}.
+ * @param {!Maybe} value - The {@link Maybe}.
  * @return {*} The mapped underlying value for a {@code Just}; otherwise, the {@code defaultValue}.
  * @throws {TypeError} if the {@code morphism} is not a {@code Function}.
  */
