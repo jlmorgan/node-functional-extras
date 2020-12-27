@@ -1,10 +1,10 @@
-# `bind(g, f)`
+# `ap(g, f)`
 
-Composes a sequence of two functions `g` after `f` where `f` maps the input value to the first argument of `g`.
+Composes a sequence of two functions `g` after `f` where `f` maps the input value to the second argument of `g`.
 
 ## Alternatives
 
-* `bind(g)(f)`
+* `ap(g)(f)`
 
 ## Arguments
 
@@ -18,13 +18,13 @@ Composes a sequence of two functions `g` after `f` where `f` maps the input valu
 ## Example
 
 ```javascript
-const subtract = (b, a) => b - a;
+const subtract = (a, b) => a - b;
 const square = a => a ** 2;
-const squareAndSubtract = bind(subtract, square);
+const subtractSquare = ap(subtract, square);
 
-squareAndSubtract(3);
-// => 6
+subtractSquare(3);
+// => -6
 
-squareAndSubtract(5);
-// => 20
+subtractSquare(5);
+// => -20
 ```

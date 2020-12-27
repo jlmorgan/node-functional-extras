@@ -4,8 +4,8 @@
  * Curries a function with two arguments.
  *
  * @memberof Tuple
- * @param {Function} f - The function to curry.
- * @return {Function} The curried function.
+ * @param {!Function} f - The function to curry.
+ * @return {!Function} The curried function.
  */
 function curry(f) {
   return function caller(a, b) {

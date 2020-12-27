@@ -7,10 +7,10 @@ const curry = require("./curry");
  * Creates a variadic curried function.
  *
  * @private
- * @param {Array} collected - Collected arguments.
- * @param {Number} length - The number of arguments to collect.
- * @param {Function} f - The function to curry.
- * @return {Function} The curried function.
+ * @param {!Array} collected - Collected arguments.
+ * @param {!Number} length - The number of arguments to collect.
+ * @param {!Function} f - The function to curry.
+ * @return {!Function} The curried function.
  */
 function createCurry(collected, length, f) {
   return function(...values) {
@@ -26,9 +26,9 @@ function createCurry(collected, length, f) {
  * Curries a function ({@code f}) with {@code length} number of arguments.
  *
  * @memberof Tuple
- * @param {Number} length - The number of arguments.
- * @param {Function} f - The function to curry.
- * @return {Function} The curried function.
+ * @param {!Number} length - The number of arguments.
+ * @param {!Function} f - The function to curry.
+ * @return {!Function} The curried function.
  */
 function curryN(length, f) {
   return createCurry([], length, f);

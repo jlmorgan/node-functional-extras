@@ -4,11 +4,11 @@ The `I` combinator or identity morphism.
 
 ## Arguments
 
-* `a (*)`: The input value.
+* `a (*)`: The value.
 
 ## Returns
 
-* `(*)`: The input value.
+* `(*)`: The value.
 
 ## Example
 

@@ -12,7 +12,7 @@ const maybeMap = require("../Maybe/maybeMap");
  * @memberof Lists
  * @param {Array} second - The list to append.
  * @param {Array} first - The list on which to append.
- * @return {Array} The appended list.
+ * @return {!Array} The appended list.
  */
 function append(second, first) {
   return maybeMap([], id, of(first).filter(Array.isArray))

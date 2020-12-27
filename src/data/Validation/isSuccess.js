@@ -8,7 +8,7 @@ const Validation = require("./Validation");
  *
  * @memberof Validation
  * @param {*} value - The value.
- * @return {Boolean} {@code true} for a {@code Success}; otherwise, {@code false}.
+ * @return {!Boolean} {@code true} for a {@code Success}; otherwise, {@code false}.
  */
 function isSuccess(value) {
   return Validation.isValidation(value) && value.isSuccess();

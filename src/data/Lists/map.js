@@ -11,7 +11,7 @@ const requireFunction = require("../Functions/requireFunction");
  * @memberof Lists
  * @param {!Function} morphism - The morphism.
  * @param {!Array} list - The list.
- * @return {Array} The mapped list.
+ * @return {!Array} The mapped list.
  * @throws {TypeError} if the {@code morphism} is not a {@code Function}.
  */
 function map(morphism, list) {

@@ -2,7 +2,7 @@
 
 // Third Party
 const { expect } = require("chai");
-const uuid = require("uuid/v4");
+const { v4: uuid } = require("uuid");
 
 // Project
 const { id } = require("../../..");

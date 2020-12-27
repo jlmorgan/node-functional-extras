@@ -10,7 +10,7 @@ const Tuple = require("./Tuple");
  * @memberof Tuple
  * @param {*} first - The first element.
  * @param {*} second - The second element.
- * @return {Tuple} A {@link Tuple} of two values.
+ * @return {!Tuple} A {@link Tuple} of two values.
  */
 function of(first, second) {
   return new Tuple(first, second);

@@ -7,7 +7,8 @@ const isRight = require("./isRight");
 /**
  * Extracts from a list of {@link Either} all of the {@code Right} elements in extracted order.
  *
- * @param {Either[]} list - The list of {@link Either}.
+ * @memberof Either
+ * @param {!Array.<Either>} list - The list of {@link Either}.
  * @return {Array} The list of underlying {@code Right} values.
  */
 function rights(list) {
