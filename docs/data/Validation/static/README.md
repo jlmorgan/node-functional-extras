@@ -3,12 +3,12 @@
 ## Table of Contents
 
 * [`.concat`](./concat.md)
-* [`.failures`](./failures.md)
-* [`.fromFailure`](./fromFailure.md)
-* [`.fromSuccess`](./fromSuccess.md)
-* [`.isFailure`](./isFailure.md)
-* [`.isSuccess`](./isSuccess.md)
+* [`.fromInvalid`](./fromInvalid.md)
+* [`.fromValid`](./fromValid.md)
+* [`.invalids`](./invalids.md)
+* [`.isInvalid`](./isInvalid.md)
+* [`.isValid`](./isValid.md)
 * [`.partitionValidations`](./partitionValidations.md)
-* [`.successes`](./successes.md)
 * [`.validate`](./validate.md)
 * [`.validationMap`](./validationMap.md)
+* [`.valids`](./valids.md)

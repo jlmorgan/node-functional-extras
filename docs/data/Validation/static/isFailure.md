@@ -1,6 +1,6 @@
-# `Validation.isFailure(value)`
+# `Validation.isInvalid(value)`
 
-Determines whether or not the `value` is a `Failure`.
+Determines whether or not the `value` is an `Invalid`.
 
 ## Arguments
 
@@ -8,17 +8,17 @@ Determines whether or not the `value` is a `Failure`.
 
 ## Returns
 
-* `(Boolean)`: `true` for a `Failure`; otherwise, `false`.
+* `(Boolean)`: `true` for an `Invalid`; otherwise, `false`.
 
 ## Examples
 
 ```javascript
-Validation.isFailure(Validation.Failure(1));
+Validation.isInvalid(Validation.Invalid(1));
 // => true
 
-Validation.isFailure(Validation.Success(1));
+Validation.isInvalid(Validation.Valid(1));
 // => false
 
-Validation.isFailure(1);
+Validation.isInvalid(1);
 // => false
 ```

@@ -1,31 +1,31 @@
 "use strict";
 
 // Project
-const { Failure, Success } = require("./Validation");
+const { Invalid, Valid } = require("./Validation");
 const concat = require("./concat");
-const failures = require("./failures");
-const fromFailure = require("./fromFailure");
-const fromSuccess = require("./fromSuccess");
-const isFailure = require("./isFailure");
-const isSuccess = require("./isSuccess");
+const invalids = require("./invalids");
+const fromInvalid = require("./fromInvalid");
+const fromValid = require("./fromValid");
+const isInvalid = require("./isInvalid");
+const isValid = require("./isValid");
 const partitionValidations = require("./partitionValidations");
 const requireValidation = require("./requireValidation");
-const successes = require("./successes");
+const valids = require("./valids");
 const validate = require("./validate");
 const validationMap = require("./validationMap");
 
 module.exports = {
   concat,
-  Failure,
-  failures,
-  fromFailure,
-  fromSuccess,
-  isFailure,
-  isSuccess,
+  fromInvalid,
+  fromValid,
+  Invalid,
+  invalids,
+  isInvalid,
+  isValid,
   partitionValidations,
   requireValidation,
-  Success,
-  successes,
+  Valid,
   validate,
-  validationMap
+  validationMap,
+  valids
 };

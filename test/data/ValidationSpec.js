@@ -14,7 +14,7 @@ describe("Validation", () => {
   describe(".concat", () => {
     it("should throw exception for non-Validation second", () => {
       const testSecond = null;
-      const testFirst = Validation.Failure(new Error());
+      const testFirst = Validation.Invalid(new Error());
 
       expect(() => Validation.concat(testSecond)(testFirst)).to.throw(
         TypeError,
@@ -23,7 +23,7 @@ describe("Validation", () => {
     });
 
     it("should throw exception for non-Validation first", () => {
-      const testSecond = Validation.Failure(new Error());
+      const testSecond = Validation.Invalid(new Error());
       const testFirst = null;
 
       expect(() => Validation.concat(testSecond)(testFirst)).to.throw(
@@ -32,106 +32,52 @@ describe("Validation", () => {
       );
     });
 
-    it("should return first for both successes", () => {
-      const testSecond = Validation.Success(uuid());
-      const testFirst = Validation.Success(uuid());
+    it("should return first for both valids", () => {
+      const testSecond = Validation.Valid(uuid());
+      const testFirst = Validation.Valid(uuid());
       const expectedResult = testFirst;
       const actualResult = Validation.concat(testSecond)(testFirst);
 
       expect(actualResult).to.equal(expectedResult);
     });
 
-    it("should return first for first failure", () => {
-      const testSecond = Validation.Success(uuid());
-      const testFirst = Validation.Failure(new Error());
+    it("should return first for first invalid", () => {
+      const testSecond = Validation.Valid(uuid());
+      const testFirst = Validation.Invalid(new Error());
       const expectedResult = testFirst;
       const actualResult = Validation.concat(testSecond)(testFirst);
 
       expect(actualResult).to.equal(expectedResult);
     });
 
-    it("should return second for second failure", () => {
-      const testSecond = Validation.Failure(new Error());
-      const testFirst = Validation.Success(uuid());
+    it("should return second for second invalid", () => {
+      const testSecond = Validation.Invalid(new Error());
+      const testFirst = Validation.Valid(uuid());
       const expectedResult = testSecond;
       const actualResult = Validation.concat(testSecond)(testFirst);
 
       expect(actualResult).to.equal(expectedResult);
     });
 
-    it("should return concatenated failures", () => {
+    it("should return concatenated invalids", () => {
       const testValue1 = new Error(uuid());
       const testValue2 = new Error(uuid());
-      const testSecond = Validation.Failure(testValue2);
-      const testFirst = Validation.Failure(testValue1);
-      const expectedResult = Validation.Failure([testValue1, testValue2]);
+      const testSecond = Validation.Invalid(testValue2);
+      const testFirst = Validation.Invalid(testValue1);
+      const expectedResult = Validation.Invalid([testValue1, testValue2]);
       const actualResult = Validation.concat(testSecond)(testFirst);
 
       expect(actualResult).to.eql(expectedResult);
     });
   });
 
-  describe(".failures", () => {
-    it("should return empty list for undefined list", () => {
-      const testList = undefined; // eslint-disable-line no-undefined
-      const expectedResult = [];
-      const actualResult = Validation.failures(testList);
-
-      expect(actualResult).to.eql(expectedResult);
-    });
-
-    it("should return empty list for null list", () => {
-      const testList = null;
-      const expectedResult = [];
-      const actualResult = Validation.failures(testList);
-
-      expect(actualResult).to.eql(expectedResult);
-    });
-
-    it("should return empty list for empty list", () => {
-      const testList = [];
-      const expectedResult = [];
-      const actualResult = Validation.failures(testList);
-
-      expect(actualResult).to.eql(expectedResult);
-    });
-
-    it("should return empty list for blank list", () => {
-      const testList = [null];
-      const expectedResult = [];
-      const actualResult = Validation.failures(testList);
-
-      expect(actualResult).to.eql(expectedResult);
-    });
-
-    it("should return list of failure values for mixed list", () => {
-      const testFailureValue1 = new Error(uuid());
-      const testFailureValue2 = new Error(uuid());
-      const testSuccessValue1 = uuid();
-      const testSuccessValue2 = uuid();
-      const testList = [
-        Validation.Failure(testFailureValue1),
-        Validation.Failure(testFailureValue2),
-        Validation.Success(testSuccessValue1),
-        Validation.Success(testSuccessValue2)
-      ];
-      const expectedResult = [
-        testFailureValue1,
-        testFailureValue2
-      ];
-      const actualResult = Validation.failures(testList);
-
-      expect(actualResult).to.eql(expectedResult);
-    });
-  });
-
-  describe(".fromFailure", () => {
+  describe(".fromInvalid", () => {
     const testDefaultValue = uuid();
 
     it("should throw an exception for a non-Array defaultValues", () => {
-      const testValidation = Validation.Success(uuid());
+      const testValidation = Validation.Valid(uuid());
 
-      expect(() => Validation.fromFailure(testDefaultValue)(testValidation)).to.throw(
+      expect(() => Validation.fromInvalid(testDefaultValue)(testValidation)).to.throw(
         TypeError,
         "defaultValues must be an Array"
       );
@@ -139,7 +85,7 @@ describe("Validation", () => {
 
     it("should return the default value for undefined", () => {
       const expectedResult = [testDefaultValue];
-      const actualResult = Validation.fromFailure([testDefaultValue])();
+      const actualResult = Validation.fromInvalid([testDefaultValue])();
 
       expect(actualResult).to.eql(expectedResult);
     });
@@ -147,35 +93,35 @@ describe("Validation", () => {
     it("should return the default value for null", () => {
       const testValidation = null;
       const expectedResult = [testDefaultValue];
-      const actualResult = Validation.fromFailure([testDefaultValue])(testValidation);
+      const actualResult = Validation.fromInvalid([testDefaultValue])(testValidation);
 
       expect(actualResult).to.eql(expectedResult);
     });
 
-    it("should return the default value for Success", () => {
-      const testValidation = Validation.Success(uuid());
+    it("should return the default value for Valid", () => {
+      const testValidation = Validation.Valid(uuid());
       const expectedResult = [testDefaultValue];
-      const actualResult = Validation.fromFailure([testDefaultValue])(testValidation);
+      const actualResult = Validation.fromInvalid([testDefaultValue])(testValidation);
 
       expect(actualResult).to.eql(expectedResult);
     });
 
-    it("should return value for Failure", () => {
-      const testFailureValue = uuid();
-      const testValidation = Validation.Failure(testFailureValue);
-      const expectedResult = [testFailureValue];
-      const actualResult = Validation.fromFailure([testDefaultValue])(testValidation);
+    it("should return value for Invalid", () => {
+      const testInvalidValue = uuid();
+      const testValidation = Validation.Invalid(testInvalidValue);
+      const expectedResult = [testInvalidValue];
+      const actualResult = Validation.fromInvalid([testDefaultValue])(testValidation);
 
       expect(actualResult).to.eql(expectedResult);
     });
   });
 
-  describe(".fromSuccess", () => {
+  describe(".fromValid", () => {
     const testDefaultValue = uuid();
 
     it("should return default value for undefined", () => {
       const expectedResult = testDefaultValue;
-      const actualResult = Validation.fromSuccess(testDefaultValue)();
+      const actualResult = Validation.fromValid(testDefaultValue)();
 
       expect(actualResult).to.equal(expectedResult);
     });
@@ -183,26 +129,80 @@ describe("Validation", () => {
     it("should return default value for null", () => {
       const testValidation = null;
       const expectedResult = testDefaultValue;
-      const actualResult = Validation.fromSuccess(testDefaultValue)(testValidation);
+      const actualResult = Validation.fromValid(testDefaultValue)(testValidation);
 
       expect(actualResult).to.equal(expectedResult);
     });
 
-    it("should return default value for Failure", () => {
-      const testValidation = Validation.Failure(uuid());
+    it("should return default value for Invalid", () => {
+      const testValidation = Validation.Invalid(uuid());
       const expectedResult = testDefaultValue;
-      const actualResult = Validation.fromSuccess(testDefaultValue)(testValidation);
+      const actualResult = Validation.fromValid(testDefaultValue)(testValidation);
 
       expect(actualResult).to.equal(expectedResult);
     });
 
-    it("should return value for Success", () => {
-      const testSuccessValue = uuid();
-      const testValidation = Validation.Success(testSuccessValue);
-      const expectedResult = testSuccessValue;
-      const actualResult = Validation.fromSuccess(testDefaultValue)(testValidation);
+    it("should return value for Valid", () => {
+      const testValidValue = uuid();
+      const testValidation = Validation.Valid(testValidValue);
+      const expectedResult = testValidValue;
+      const actualResult = Validation.fromValid(testDefaultValue)(testValidation);
 
       expect(actualResult).to.equal(expectedResult);
+    });
+  });
+
+  describe(".invalids", () => {
+    it("should return empty list for undefined list", () => {
+      const testList = undefined; // eslint-disable-line no-undefined
+      const expectedResult = [];
+      const actualResult = Validation.invalids(testList);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+
+    it("should return empty list for null list", () => {
+      const testList = null;
+      const expectedResult = [];
+      const actualResult = Validation.invalids(testList);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+
+    it("should return empty list for empty list", () => {
+      const testList = [];
+      const expectedResult = [];
+      const actualResult = Validation.invalids(testList);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+
+    it("should return empty list for blank list", () => {
+      const testList = [null];
+      const expectedResult = [];
+      const actualResult = Validation.invalids(testList);
+
+      expect(actualResult).to.eql(expectedResult);
+    });
+
+    it("should return list of invalid values for mixed list", () => {
+      const testInvalidValue1 = new Error(uuid());
+      const testInvalidValue2 = new Error(uuid());
+      const testValidValue1 = uuid();
+      const testValidValue2 = uuid();
+      const testList = [
+        Validation.Invalid(testInvalidValue1),
+        Validation.Invalid(testInvalidValue2),
+        Validation.Valid(testValidValue1),
+        Validation.Valid(testValidValue2)
+      ];
+      const expectedResult = [
+        testInvalidValue1,
+        testInvalidValue2
+      ];
+      const actualResult = Validation.invalids(testList);
+
+      expect(actualResult).to.eql(expectedResult);
     });
   });
 
@@ -240,19 +240,19 @@ describe("Validation", () => {
     });
 
     it("should return lists for mixed list", () => {
-      const testFailureValue1 = new Error(uuid());
-      const testFailureValue2 = new Error(uuid());
-      const testSuccessValue1 = uuid();
-      const testSuccessValue2 = uuid();
+      const testInvalidValue1 = new Error(uuid());
+      const testInvalidValue2 = new Error(uuid());
+      const testValidValue1 = uuid();
+      const testValidValue2 = uuid();
       const testList = [
-        Validation.Failure(testFailureValue1),
-        Validation.Failure(testFailureValue2),
-        Validation.Success(testSuccessValue1),
-        Validation.Success(testSuccessValue2)
+        Validation.Invalid(testInvalidValue1),
+        Validation.Invalid(testInvalidValue2),
+        Validation.Valid(testValidValue1),
+        Validation.Valid(testValidValue2)
       ];
       const expectedResult = Tuple.of(
-        [testFailureValue1, testFailureValue2],
-        [testSuccessValue1, testSuccessValue2]
+        [testInvalidValue1, testInvalidValue2],
+        [testValidValue1, testValidValue2]
       );
       const actualResult = Validation.partitionValidations(testList);
 
@@ -260,11 +260,11 @@ describe("Validation", () => {
     });
   });
 
-  describe(".successes", () => {
+  describe(".valids", () => {
     it("should return empty list for undefined list", () => {
       const testList = undefined; // eslint-disable-line no-undefined
       const expectedResult = [];
-      const actualResult = Validation.successes(testList);
+      const actualResult = Validation.valids(testList);
 
       expect(actualResult).to.eql(expectedResult);
     });
@@ -272,7 +272,7 @@ describe("Validation", () => {
     it("should return empty list for null list", () => {
       const testList = null;
       const expectedResult = [];
-      const actualResult = Validation.successes(testList);
+      const actualResult = Validation.valids(testList);
 
       expect(actualResult).to.eql(expectedResult);
     });
@@ -280,7 +280,7 @@ describe("Validation", () => {
     it("should return empty list for empty list", () => {
       const testList = [];
       const expectedResult = [];
-      const actualResult = Validation.successes(testList);
+      const actualResult = Validation.valids(testList);
 
       expect(actualResult).to.eql(expectedResult);
     });
@@ -288,125 +288,125 @@ describe("Validation", () => {
     it("should return empty list for blank list", () => {
       const testList = [null];
       const expectedResult = [];
-      const actualResult = Validation.successes(testList);
+      const actualResult = Validation.valids(testList);
 
       expect(actualResult).to.eql(expectedResult);
     });
 
-    it("should return list of success values for mixed list", () => {
-      const testFailureValue1 = new Error(uuid());
-      const testFailureValue2 = new Error(uuid());
-      const testSuccessValue1 = uuid();
-      const testSuccessValue2 = uuid();
+    it("should return list of valid values for mixed list", () => {
+      const testInvalidValue1 = new Error(uuid());
+      const testInvalidValue2 = new Error(uuid());
+      const testValidValue1 = uuid();
+      const testValidValue2 = uuid();
       const testList = [
-        Validation.Failure(testFailureValue1),
-        Validation.Failure(testFailureValue2),
-        Validation.Success(testSuccessValue1),
-        Validation.Success(testSuccessValue2)
+        Validation.Invalid(testInvalidValue1),
+        Validation.Invalid(testInvalidValue2),
+        Validation.Valid(testValidValue1),
+        Validation.Valid(testValidValue2)
       ];
       const expectedResult = [
-        testSuccessValue1,
-        testSuccessValue2
+        testValidValue1,
+        testValidValue2
       ];
-      const actualResult = Validation.successes(testList);
+      const actualResult = Validation.valids(testList);
 
       expect(actualResult).to.eql(expectedResult);
     });
   });
 
   describe(".validate", () => {
-    const testFailureValue = new Error(uuid());
+    const testInvalidValue = new Error(uuid());
     const testValue = uuid();
 
     it("should throw an exception for non-Function predicate", () => {
       const testPredicate = null;
 
-      expect(() => Validation.validate(testPredicate)(testFailureValue)(testValue)).to.throw(
+      expect(() => Validation.validate(testPredicate)(testInvalidValue)(testValue)).to.throw(
         TypeError,
         "predicate must be a Function"
       );
     });
 
-    it("should return failure for false predicate", () => {
+    it("should return invalid for false predicate", () => {
       const testPredicate = () => false;
-      const expectedResult = Validation.Failure(testFailureValue);
-      const actualResult = Validation.validate(testPredicate)(testFailureValue)(testValue);
+      const expectedResult = Validation.Invalid(testInvalidValue);
+      const actualResult = Validation.validate(testPredicate)(testInvalidValue)(testValue);
 
       expect(actualResult).to.eql(expectedResult);
     });
 
-    it("should return success for true predicate", () => {
+    it("should return valid for true predicate", () => {
       const testPredicate = () => true;
-      const expectedResult = Validation.Success(testValue);
-      const actualResult = Validation.validate(testPredicate)(testFailureValue)(testValue);
+      const expectedResult = Validation.Valid(testValue);
+      const actualResult = Validation.validate(testPredicate)(testInvalidValue)(testValue);
 
       expect(actualResult).to.eql(expectedResult);
     });
   });
 
   describe(".validationMap", () => {
-    it("should throw an exception for non-Function failure morphism", () => {
-      const testFailureMorphism = null;
-      const testSuccessMorphism = number => number.toFixed(2);
-      const testValidation = Validation.Failure(new Error(uuid()));
+    it("should throw an exception for non-Function invalid morphism", () => {
+      const testInvalidMorphism = null;
+      const testValidMorphism = number => number.toFixed(2);
+      const testValidation = Validation.Invalid(new Error(uuid()));
 
-      expect(() => Validation.validationMap(testFailureMorphism)(testSuccessMorphism)(testValidation)).to.throw(
+      expect(() => Validation.validationMap(testInvalidMorphism)(testValidMorphism)(testValidation)).to.throw(
         TypeError,
-        "failureMorphism must be a Function"
+        "invalidMorphism must be a Function"
       );
     });
 
-    it("should throw an exception for non-Function success morphism", () => {
-      const testFailureMorphism = list => list.map(error => error.message).join(",");
-      const testSuccessMorphism = null;
-      const testValidation = Validation.Success(Math.random());
+    it("should throw an exception for non-Function valid morphism", () => {
+      const testInvalidMorphism = list => list.map(error => error.message).join(",");
+      const testValidMorphism = null;
+      const testValidation = Validation.Valid(Math.random());
 
-      expect(() => Validation.validationMap(testFailureMorphism)(testSuccessMorphism)(testValidation)).to.throw(
+      expect(() => Validation.validationMap(testInvalidMorphism)(testValidMorphism)(testValidation)).to.throw(
         TypeError,
-        "successMorphism must be a Function"
+        "validMorphism must be a Function"
       );
     });
 
     it("should throw an exception for non-Validation validation", () => {
-      const testFailureMorphism = list => list.map(error => error.message).join(",");
-      const testSuccessMorphism = number => number.toFixed(2);
+      const testInvalidMorphism = list => list.map(error => error.message).join(",");
+      const testValidMorphism = number => number.toFixed(2);
       const testValidation = null;
 
-      expect(() => Validation.validationMap(testFailureMorphism)(testSuccessMorphism)(testValidation)).to.throw(
+      expect(() => Validation.validationMap(testInvalidMorphism)(testValidMorphism)(testValidation)).to.throw(
         TypeError,
         "validation must be a Validation"
       );
     });
 
-    it("should return mapped value for failure", () => {
-      const testFailureMorphism = list => list.map(error => error.message).join(",");
-      const testSuccessMorphism = number => number.toFixed(2);
-      const testFailureValues = [
+    it("should return mapped value for invalid", () => {
+      const testInvalidMorphism = list => list.map(error => error.message).join(",");
+      const testValidMorphism = number => number.toFixed(2);
+      const testInvalidValues = [
         new Error(uuid()),
         new Error(uuid())
       ];
-      const testValidation = Validation.Failure(testFailureValues);
-      const expectedResult = testFailureMorphism(testFailureValues);
-      const actualResult = Validation.validationMap(testFailureMorphism)(testSuccessMorphism)(testValidation);
+      const testValidation = Validation.Invalid(testInvalidValues);
+      const expectedResult = testInvalidMorphism(testInvalidValues);
+      const actualResult = Validation.validationMap(testInvalidMorphism)(testValidMorphism)(testValidation);
 
       expect(actualResult).to.eql(expectedResult);
     });
 
-    it("should return mapped value for success", () => {
-      const testFailureMorphism = list => list.map(error => error.message).join(",");
-      const testSuccessMorphism = number => number.toFixed(2);
+    it("should return mapped value for valid", () => {
+      const testInvalidMorphism = list => list.map(error => error.message).join(",");
+      const testValidMorphism = number => number.toFixed(2);
       const testValue = Math.random();
-      const testValidation = Validation.Success(testValue);
-      const expectedResult = testSuccessMorphism(testValue);
-      const actualResult = Validation.validationMap(testFailureMorphism)(testSuccessMorphism)(testValidation);
+      const testValidation = Validation.Valid(testValue);
+      const expectedResult = testValidMorphism(testValue);
+      const actualResult = Validation.validationMap(testInvalidMorphism)(testValidMorphism)(testValidation);
 
       expect(actualResult).to.eql(expectedResult);
     });
   });
 
-  describe("Failure", () => {
-    const testFailureValue = uuid();
-    const testValidation = Validation.Failure(testFailureValue);
+  describe("Invalid", () => {
+    const testInvalidValue = uuid();
+    const testValidation = Validation.Invalid(testInvalidValue);
 
     describe("#equals", () => {
       it("should return false for undefined", () => {
@@ -430,7 +430,7 @@ describe("Validation", () => {
       });
 
       it("should return false for differing values", () => {
-        const testOther = Validation.Failure(uuid());
+        const testOther = Validation.Invalid(uuid());
         const actualResult = testValidation.equals(testOther);
 
         expect(actualResult).to.be.false; // eslint-disable-line no-unused-expressions
@@ -443,35 +443,35 @@ describe("Validation", () => {
       });
 
       it("should return true for same value", () => {
-        const testOther = Validation.Failure(testFailureValue);
+        const testOther = Validation.Invalid(testInvalidValue);
         const actualResult = testValidation.equals(testOther);
 
         expect(actualResult).to.be.true; // eslint-disable-line no-unused-expressions
       });
 
-      it("should return false for same value, but Success", () => {
-        const testOther = Validation.Success(testFailureValue);
+      it("should return false for same value, but Valid", () => {
+        const testOther = Validation.Valid(testInvalidValue);
         const actualResult = testValidation.equals(testOther);
 
         expect(actualResult).to.be.false; // eslint-disable-line no-unused-expressions
       });
     });
 
-    describe("#isFailure", () => {
+    describe("#isInvalid", () => {
       it("should return true", () => {
-        expect(testValidation.isFailure()).to.be.true; // eslint-disable-line no-unused-expressions
+        expect(testValidation.isInvalid()).to.be.true; // eslint-disable-line no-unused-expressions
       });
     });
 
-    describe("#isSuccess", () => {
+    describe("#isValid", () => {
       it("should return false", () => {
-        expect(testValidation.isSuccess()).to.be.false; // eslint-disable-line no-unused-expressions
+        expect(testValidation.isValid()).to.be.false; // eslint-disable-line no-unused-expressions
       });
     });
 
     describe("#toJSON", () => {
       it("should return a JSON formatted string", () => {
-        const expectedResult = JSON.stringify({ failure: [testFailureValue] });
+        const expectedResult = JSON.stringify({ invalid: [testInvalidValue] });
         const actualResult = JSON.stringify(testValidation);
 
         expect(actualResult).to.eql(expectedResult);
@@ -480,28 +480,28 @@ describe("Validation", () => {
 
     describe("#toString", () => {
       it("should return a formatted string", () => {
-        const testFailureValues = [uuid(), uuid()];
-        const testFailure = Validation.Failure(testFailureValues);
-        const expectedResult = `Failure([${testFailureValues.join(",")}])`;
-        const actualResult = testFailure.toString();
+        const testInvalidValues = [uuid(), uuid()];
+        const testInvalid = Validation.Invalid(testInvalidValues);
+        const expectedResult = `Invalid([${testInvalidValues.join(",")}])`;
+        const actualResult = testInvalid.toString();
 
         expect(actualResult).to.eql(expectedResult);
       });
     });
 
     it("should coerce the underlying value", () => {
-      const testObject = { value: testFailureValue };
-      const testValidationObject = Validation.Failure(testObject);
-      const expectedResult = "Failure([[object Object]])";
+      const testObject = { value: testInvalidValue };
+      const testValidationObject = Validation.Invalid(testObject);
+      const expectedResult = "Invalid([[object Object]])";
       const actualResult = testValidationObject + ""; // eslint-disable-line prefer-template, no-implicit-coercion
 
       expect(actualResult).to.equal(expectedResult);
     });
   });
 
-  describe("Success", () => {
-    const testSuccessValue = uuid();
-    const testValidation = Validation.Success(testSuccessValue);
+  describe("Valid", () => {
+    const testValidValue = uuid();
+    const testValidation = Validation.Valid(testValidValue);
 
     describe("#equals", () => {
       it("should return false for undefined", () => {
@@ -525,7 +525,7 @@ describe("Validation", () => {
       });
 
       it("should return false for differing values", () => {
-        const testOther = Validation.Success(uuid());
+        const testOther = Validation.Valid(uuid());
         const actualResult = testValidation.equals(testOther);
 
         expect(actualResult).to.be.false; // eslint-disable-line no-unused-expressions
@@ -538,35 +538,35 @@ describe("Validation", () => {
       });
 
       it("should return true for same value", () => {
-        const testOther = Validation.Success(testSuccessValue);
+        const testOther = Validation.Valid(testValidValue);
         const actualResult = testValidation.equals(testOther);
 
         expect(actualResult).to.be.true; // eslint-disable-line no-unused-expressions
       });
 
-      it("should return false for same value, but Failure", () => {
-        const testOther = Validation.Failure(testSuccessValue);
+      it("should return false for same value, but Invalid", () => {
+        const testOther = Validation.Invalid(testValidValue);
         const actualResult = testValidation.equals(testOther);
 
         expect(actualResult).to.be.false; // eslint-disable-line no-unused-expressions
       });
     });
 
-    describe("#isFailure", () => {
+    describe("#isInvalid", () => {
       it("should return false", () => {
-        expect(testValidation.isFailure()).to.be.false; // eslint-disable-line no-unused-expressions
+        expect(testValidation.isInvalid()).to.be.false; // eslint-disable-line no-unused-expressions
       });
     });
 
-    describe("#isSuccess", () => {
+    describe("#isValid", () => {
       it("should return true", () => {
-        expect(testValidation.isSuccess()).to.be.true; // eslint-disable-line no-unused-expressions
+        expect(testValidation.isValid()).to.be.true; // eslint-disable-line no-unused-expressions
       });
     });
 
     describe("#toJSON", () => {
       it("should return a JSON formatted string", () => {
-        const expectedResult = JSON.stringify({ success: testSuccessValue });
+        const expectedResult = JSON.stringify({ valid: testValidValue });
         const actualResult = JSON.stringify(testValidation);
 
         expect(actualResult).to.eql(expectedResult);
@@ -575,7 +575,7 @@ describe("Validation", () => {
 
     describe("#toString", () => {
       it("should return a formatted string", () => {
-        const expectedResult = `Success(${testSuccessValue})`;
+        const expectedResult = `Valid(${testValidValue})`;
         const actualResult = testValidation.toString();
 
         expect(actualResult).to.eql(expectedResult);
@@ -583,9 +583,9 @@ describe("Validation", () => {
     });
 
     it("should coerce the underlying value", () => {
-      const testObject = { value: testSuccessValue };
-      const testValidationObject = Validation.Success(testObject);
-      const expectedResult = "Success([object Object])";
+      const testObject = { value: testValidValue };
+      const testValidationObject = Validation.Valid(testObject);
+      const expectedResult = "Valid([object Object])";
       const actualResult = testValidationObject + ""; // eslint-disable-line prefer-template, no-implicit-coercion
 
       expect(actualResult).to.equal(expectedResult);

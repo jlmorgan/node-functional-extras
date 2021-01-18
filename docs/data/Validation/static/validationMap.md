@@ -1,16 +1,16 @@
-# `Validation.validationMap(failureMap, successMap, validation)`
+# `Validation.validationMap(invalidMap, validMap, validation)`
 
-Provides a catamorphism of the `validation` to a singular value. If the value is `Failure a`, apply the first function to `a`; otherwise, apply the second function to `b`.
+Provides a catamorphism of the `validation` to a singular value. If the value is `Invalid a`, apply the first function to `a`; otherwise, apply the second function to `b`.
 
 ## Alternatives
 
-* `Validation.validationMap(failureMap, successMap)(validation)`
-* `Validation.validationMap(failureMap)(successMap)(validation)`
+* `Validation.validationMap(invalidMap, validMap)(validation)`
+* `Validation.validationMap(invalidMap)(validMap)(validation)`
 
 ## Arguments
 
-* `failureMap (Function)`: Maps the value of a `Failure a` to `c`.
-* `successMap (Function)`: Maps the value of a `Success b` to `c`.
+* `invalidMap (Function)`: Maps the value of a `Invalid a` to `c`.
+* `validMap (Function)`: Maps the value of a `Valid b` to `c`.
 * `validation (Validation)`: The `Validation`.
 
 ## Returns
@@ -19,7 +19,7 @@ Provides a catamorphism of the `validation` to a singular value. If the value is
 
 ## Throws
 
-* `TypeError` if the `failureMap` or `successMap` is not a `Function`.
+* `TypeError` if the `invalidMap` or `validMap` is not a `Function`.
 * `TypeError` if the `validation` is not an `Validation`.
 
 ## Examples
@@ -28,14 +28,14 @@ Provides a catamorphism of the `validation` to a singular value. If the value is
 Validation.validationMap(
   errors => errors.map(error => error.message).join(", "),
   value => `The value is ${value % 2 === 0 ? "even" : "odd"}`,
-  Validation.Success(1)
+  Validation.Valid(1)
 );
 // => "The value is odd"
 
 Validation.validationMap(
   errors => errors.map(error => error.message).join(", "),
   value => `The value is ${value % 2 === 0 ? "even" : "odd"}`,
-  Validation.Failure(new Error("The value is not a number"))
+  Validation.Invalid(new Error("The value is not a number"))
 );
 // => "The value is not a number"
 ```
