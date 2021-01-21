@@ -1,14 +1,14 @@
-# `Validation.fromSuccess(defaultValue, validation)`
+# `Validation.fromValid(defaultValue, validation)`
 
-Extracts the value out of a `Success`; otherwise, returns the `defaultValue`.
+Extracts the value out of a `Valid`; otherwise, returns the `defaultValue`.
 
 ## Alternatives
 
-* `Validation.fromSuccess(defaultValue)(validation)`
+* `Validation.fromValid(defaultValue)(validation)`
 
 ## Arguments
 
-* `defaultValue (*)`: Value used if the `validation` is not a `Success`.
+* `defaultValue (*)`: Value used if the `validation` is not a `Valid`.
 * `validation (Validation)`: The `Validation`.
 
 ## Returns
@@ -18,12 +18,12 @@ Extracts the value out of a `Success`; otherwise, returns the `defaultValue`.
 ## Examples
 
 ```javascript
-Validation.fromSuccess(0, Validation.Success(1));
+Validation.fromValid(0, Validation.Valid(1));
 // => 1
 
-Validation.fromSuccess(0, "a");
+Validation.fromValid(0, "a");
 // => 0
 
-Validation.fromSuccess(0, Validation.Failure("a"));
+Validation.fromValid(0, Validation.Invalid("a"));
 // => 0
 ```

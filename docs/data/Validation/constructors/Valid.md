@@ -1,6 +1,6 @@
-# `Validation.Success(value)`
+# `Validation.Valid(value)`
 
-Encapsulates a success value.
+Encapsulates a valid value.
 
 ## Arguments
 
@@ -13,6 +13,6 @@ Encapsulates a success value.
 ## Example
 
 ```javascript
-Validation.Success("a");
-// => Success("a")
+Validation.Valid("a");
+// => Valid("a")
 ```

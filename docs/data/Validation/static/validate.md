@@ -1,21 +1,21 @@
-# `Validation.validate(predicate, failureValue, value)`
+# `Validation.validate(predicate, invalidValue, value)`
 
-Validates a value `b` and returns a `Success` of `b` if the `predicate` returns `true`; otherwise, a `Failure` of `a`.
+Validates a value `b` and returns a `Valid` of `b` if the `predicate` returns `true`; otherwise, an `Invalid` of `a`.
 
 ## Alternatives
 
-* `Validation.validate(predicate, failureValue)(value)`
-* `Validation.validate(predicate)(failureValue)(value)`
+* `Validation.validate(predicate, invalidValue)(value)`
+* `Validation.validate(predicate)(invalidValue)(value)`
 
 ## Arguments
 
 * `predicate (Function)`: The predicate.
-* `failureValue (*)`: The failure value.
+* `invalidValue (*)`: The invalid value.
 * `value (*)`: The value to test.
 
 ## Returns
 
-* `(Validation)`: A `Success` of the `value` if the `predicate` returns `true`; otherwise, a `Failure` of `failureValue`.
+* `(Validation)`: A `Valid` of the `value` if the `predicate` returns `true`; otherwise, an `Invalid` of `invalidValue`.
 
 ## Throws
 
@@ -29,12 +29,12 @@ Validation.validate(
   new TypeError("The value must be even"),
   0
 );
-// => Success(0)
+// => Valid(0)
 
 Validation.validate(
   value => value % 2 === 0,
   new TypeError("The value must be even"),
   1
 );
-// => Failure([TypeError("The value must be even")])
+// => Invalid([TypeError("The value must be even")])
 ```

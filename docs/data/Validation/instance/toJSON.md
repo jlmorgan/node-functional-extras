@@ -7,11 +7,11 @@ Converts the `instance` to a [`JSON`][JSON] representation.
 * `(String)`: The `instance` as a [`JSON`][JSON] formatted `String`.
 
 ```javascript
-Validation.Failure({ a: 1 }).toJSON();
-// => '{"failure":{"a":1}}'
+Validation.Invalid({ a: 1 }).toJSON();
+// => '{"invalid":{"a":1}}'
 
-Validation.Success({ a: 1 }).toJSON();
-// => '{"success":{"a":1}}'
+Validation.Valid({ a: 1 }).toJSON();
+// => '{"valid":{"a":1}}'
 ```
 
 [JSON]: https://www.json.org

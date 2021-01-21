@@ -2,19 +2,19 @@
 
 // Project
 const curry = require("../Tuple/curry");
-const { Failure } = require("./Validation");
-const fromFailure = require("./fromFailure");
+const { Invalid } = require("./Validation");
+const fromInvalid = require("./fromInvalid");
 const requireValidation = require("./requireValidation");
 
 /**
- * Concatenates two {@code Failure} values together, replace a {@code Success} with the {@code Failure}; otherwise,
- * take the first {@code Success}.
+ * Concatenates two {@code Invalid} values together, replace a {@code Valid} with the {@code Invalid}; otherwise,
+ * take the first {@code Valid}.
  *
  * @memberof Validation
  * @param {!Validation} second - The second {@link Validation}.
  * @param {!Validation} first - The first {@link Validation}.
- * @return {!Validation} The first {@code Success} for two successes, the first {@code Failure} for mixed; otherwise, a
- * {@code Failure} of the concatenation of the failure values.
+ * @return {!Validation} The first {@code Valid} for two valids, the first {@code Invalid} for mixed; otherwise, a
+ * {@code Invalid} of the concatenation of the invalid values.
  * @throws {TypeError} if the either value is not a {@link Validation}.
  */
 function concat(second, first) {
@@ -23,11 +23,11 @@ function concat(second, first) {
 
   let result = first;
 
-  if (first.isSuccess() && second.isFailure()) {
+  if (first.isValid() && second.isInvalid()) {
     result = second;
-  } else if (second.isFailure()) {
-    result = Failure(fromFailure([], first)
-      .concat(fromFailure([], second))
+  } else if (second.isInvalid()) {
+    result = Invalid(fromInvalid([], first)
+      .concat(fromInvalid([], second))
     );
   }
 

@@ -13,18 +13,18 @@ Determines whether or not the `other` has the same value as the current `instanc
 ## Examples
 
 ```javascript
-const failure = Validation.Failure("a");
-const success = Validation.Success("a");
+const invalid = Validation.Invalid("a");
+const valid = Validation.Valid("a");
 
-success.equals("a");
+valid.equals("a");
 // => false
 
-success.equals(failure);
+valid.equals(invalid);
 // => false
 
-success.equals(Validation.Success("a"));
+valid.equals(Validation.Valid("a"));
 // => true
 
-failure.equals(Validation.Failure("a"));
+invalid.equals(Validation.Invalid("a"));
 // => true
 ```

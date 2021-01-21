@@ -1,6 +1,6 @@
-# `Validation.isSuccess(value)`
+# `Validation.isValid(value)`
 
-Determines whether or not the `value` is a `Success`.
+Determines whether or not the `value` is a `Valid`.
 
 ## Arguments
 
@@ -8,17 +8,17 @@ Determines whether or not the `value` is a `Success`.
 
 ## Returns
 
-* `(Boolean)`: `true` for a `Success`; otherwise, `false`.
+* `(Boolean)`: `true` for a `Valid`; otherwise, `false`.
 
 ## Examples
 
 ```javascript
-Validation.isSuccess(Validation.Success(1));
+Validation.isValid(Validation.Valid(1));
 // => true
 
-Validation.isSuccess(Validation.Failure(1));
+Validation.isValid(Validation.Invalid(1));
 // => false
 
-Validation.isSuccess(1);
+Validation.isValid(1);
 // => false
 ```

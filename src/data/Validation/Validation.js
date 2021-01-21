@@ -4,9 +4,9 @@
 const isEqual = require("../Arrays/equals");
 
 /**
- * The {@link Validation} type is a right-biased disjunction that represents two possibilities: either a {@code Failure}
- * of {@code a} or a {@code Success} of {@code b}. By convention, the {@link Validation} is used to represent a value or
- * failure result of some function or process as a {@code Failure} of the failure message or a {@code Success} of the
+ * The {@link Validation} type is a right-biased disjunction that represents two possibilities: either a {@code Invalid}
+ * of {@code a} or a {@code Valid} of {@code b}. By convention, the {@link Validation} is used to represent a value or
+ * invalid result of some function or process as a {@code Invalid} of the invalid message or a {@code Valid} of the
  * value.
  */
 class Validation {
@@ -21,23 +21,23 @@ class Validation {
   }
 
   /**
-   * Determines whether or not the {@link Validation} is a {@code Failure}.
+   * Determines whether or not the {@link Validation} is a {@code Invalid}.
    *
    * @return {!Boolean} {@code true} for a {@code Left}; otherwise, {@code false}.
    */
-  isFailure() {
-    return !this.isSuccess();
+  isInvalid() {
+    return !this.isValid();
   }
 }
 
 /**
- * Encapsulates the failure value(s) of the disjunction.
+ * Encapsulates the invalid value(s) of the disjunction.
  *
  * @extends Validation
  */
-class Failure extends Validation {
+class Invalid extends Validation {
   /**
-   * @param {*} values - Failure values.
+   * @param {*} values - Invalid values.
    */
   constructor(values) {
     super();
@@ -53,16 +53,16 @@ class Failure extends Validation {
    */
   equals(other) {
     return Validation.isValidation(other) &&
-      other.isFailure() &&
+      other.isInvalid() &&
       isEqual(other.valueOf(), this.valueOf());
   }
 
   /**
-   * Determines whether or not the {@link Validation} is a {@code Failure}.
+   * Determines whether or not the {@link Validation} is a {@code Invalid}.
    *
-   * @return {!Boolean} {@code true} for a {@code Failure}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Invalid}; otherwise, {@code false}.
    */
-  isSuccess() {
+  isValid() {
     return false;
   }
 
@@ -72,7 +72,7 @@ class Failure extends Validation {
    * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
    */
   toJSON() {
-    return { failure: this._values };
+    return { invalid: this._values };
   }
 
   /**
@@ -81,7 +81,7 @@ class Failure extends Validation {
    * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
-    return `Failure([${this._values.join(",")}])`;
+    return `Invalid([${this._values.join(",")}])`;
   }
 
   /**
@@ -95,13 +95,13 @@ class Failure extends Validation {
 }
 
 /**
- * Encapsulates the success value of the disjunction.
+ * Encapsulates the valid value of the disjunction.
  *
  * @extends Validation
  */
-class Success extends Validation {
+class Valid extends Validation {
   /**
-   * @param {*} value - Success value.
+   * @param {*} value - Valid value.
    */
   constructor(value) {
     super();
@@ -117,16 +117,16 @@ class Success extends Validation {
    */
   equals(other) {
     return Validation.isValidation(other) &&
-      other.isSuccess() &&
+      other.isValid() &&
       other.valueOf() === this.valueOf();
   }
 
   /**
-   * Determines whether or not the {@link Validation} is a {@code Success}.
+   * Determines whether or not the {@link Validation} is a {@code Valid}.
    *
-   * @return {!Boolean} {@code true} for a {@code Success}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Valid}; otherwise, {@code false}.
    */
-  isSuccess() {
+  isValid() {
     return true;
   }
 
@@ -136,7 +136,7 @@ class Success extends Validation {
    * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
    */
   toJSON() {
-    return { success: this._value };
+    return { valid: this._value };
   }
 
   /**
@@ -145,7 +145,7 @@ class Success extends Validation {
    * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
-    return `Success(${this._value})`;
+    return `Valid(${this._value})`;
   }
 
   /**
@@ -160,26 +160,26 @@ class Success extends Validation {
 
 module.exports = {
   /**
-   * Creates a {@code Failure} from an arbitrary value or array of values.
+   * Creates a {@code Invalid} from an arbitrary value or array of values.
    *
    * @constructor
    * @param {*} value - The value.
-   * @return {!Either} A {@code Failure} of the value.
+   * @return {!Either} A {@code Invalid} of the value.
    */
-  Failure(value) {
-    return new Failure(value);
+  Invalid(value) {
+    return new Invalid(value);
   },
 
   isValidation: Validation.isValidation,
 
   /**
-   * Creates a {@code Success} from an arbitrary value.
+   * Creates a {@code Valid} from an arbitrary value.
    *
    * @constructor
    * @param {*} value - The value.
-   * @return {!Either} A {@code Success} of the value.
+   * @return {!Either} A {@code Valid} of the value.
    */
-  Success(value) {
-    return new Success(value);
+  Valid(value) {
+    return new Valid(value);
   }
 };

@@ -1,26 +1,26 @@
 "use strict";
 
 // Project
-const { Failure, Success } = require("./Validation");
+const { Invalid, Valid } = require("./Validation");
 const curryN = require("../Tuple/curryN");
 const requireFunction = require("../Functions/requireFunction");
 
 /**
- * Validates a value {@code b} and returns a {@code Success} of {@code b} if the {@code predicate} returns
- * {@code true}; otherwise, a {@code Failure} of {@code a}.
+ * Validates a value {@code b} and returns a {@code Valid} of {@code b} if the {@code predicate} returns
+ * {@code true}; otherwise, a {@code Invalid} of {@code a}.
  *
  * @memberof Validation
  * @param {!Function} predicate - The predicate.
- * @param {*} failureValue - The failure value.
+ * @param {*} invalidValue - The invalid value.
  * @param {*} value - The value to test.
- * @return {!Validation} A {@code Success} of the {@code value} if the {@code predicate} returns {@code true};
- * otherwise, a {@code Failure} of {@code failureValue}.
+ * @return {!Validation} A {@code Valid} of the {@code value} if the {@code predicate} returns {@code true};
+ * otherwise, a {@code Invalid} of {@code invalidValue}.
  * @throws {TypeError} if the {@code predicate} is not a {@code Function}.
  */
-function validate(predicate, failureValue, value) {
+function validate(predicate, invalidValue, value) {
   return requireFunction(predicate, "predicate")(value) ?
-    Success(value) :
-    Failure(failureValue);
+    Valid(value) :
+    Invalid(invalidValue);
 }
 
 module.exports = curryN(3, validate); // eslint-disable-line no-magic-numbers

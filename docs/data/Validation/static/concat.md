@@ -1,6 +1,6 @@
 # `Validation.concat(second, first)`
 
-Concatenates two `Failure` values together, replace a `Success` with the `Failure`; otherwise, take the first `Success`.
+Concatenates two `Invalid` values together, replace a `Valid` with the `Invalid`; otherwise, take the first `Valid`.
 
 ## Alternatives
 
@@ -13,7 +13,7 @@ Concatenates two `Failure` values together, replace a `Success` with the `Failur
 
 ## Returns
 
-* `(Validation)`: The first `Success` for two successes, the first `Failure` for mixed; otherwise, a `Failure` of the concatenation of the failure values.
+* `(Validation)`: The first `Valid` for two valids, the first `Invalid` for mixed; otherwise, an `Invalid` of the concatenation of the invalid values.
 
 ## Throws
 
@@ -23,26 +23,26 @@ Concatenates two `Failure` values together, replace a `Success` with the `Failur
 
 ```javascript
 Validation.concat(
-  Validation.Success(0),
-  Validation.Success(1)
+  Validation.Valid(0),
+  Validation.Valid(1)
 );
-// => Success(0)
+// => Valid(0)
 
 Validation.concat(
-  Validation.Success(0),
-  Validation.Failure("a")
+  Validation.Valid(0),
+  Validation.Invalid("a")
 );
-// => Failure(["a"])
+// => Invalid(["a"])
 
 Validation.concat(
-  Validation.Failure("a"),
-  Validation.Success(0)
+  Validation.Invalid("a"),
+  Validation.Valid(0)
 );
-// => Failure(["a"])
+// => Invalid(["a"])
 
 Validation.concat(
-  Validation.Failure("b"),
-  Validation.Failure("a")
+  Validation.Invalid("b"),
+  Validation.Invalid("a")
 );
-// => Failure(["a", "b"])
+// => Invalid(["a", "b"])
 ```

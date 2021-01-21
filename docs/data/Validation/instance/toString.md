@@ -9,9 +9,9 @@ Converts the `instance` to a `String` representation.
 ## Examples
 
 ```javascript
-Validation.Failure("a").toString();
-// => "Failure(a)"
+Validation.Invalid("a").toString();
+// => "Invalid(a)"
 
-Validation.Success("a").toString();
-// => "Success(a)"
+Validation.Valid("a").toString();
+// => "Valid(a)"
 ```

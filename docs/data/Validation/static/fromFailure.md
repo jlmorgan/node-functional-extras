@@ -1,14 +1,14 @@
-# `Validation.fromFailure(defaultValues, validation)`
+# `Validation.fromInvalid(defaultValues, validation)`
 
-Extracts the value out of a `Failure`; otherwise, returns the `defaultValues`.
+Extracts the value out of an `Invalid`; otherwise, returns the `defaultValues`.
 
 ## Alternatives
 
-* `Validation.fromFailure(defaultValues)(validation)`
+* `Validation.fromInvalid(defaultValues)(validation)`
 
 ## Arguments
 
-* `defaultValues (Array)`: Values used if the `validation` is not a `Failure`.
+* `defaultValues (Array)`: Values used if the `validation` is not an `Invalid`.
 * `validation (Validation)`: The `Validation`.
 
 ## Returns
@@ -18,12 +18,12 @@ Extracts the value out of a `Failure`; otherwise, returns the `defaultValues`.
 ## Examples
 
 ```javascript
-Validation.fromFailure([0], Validation.Failure(1));
+Validation.fromInvalid([0], Validation.Invalid(1));
 // => [1]
 
-Validation.fromFailure([0], "a");
+Validation.fromInvalid([0], "a");
 // => [0]
 
-Validation.fromFailure([0], Validation.Success("a"));
+Validation.fromInvalid([0], Validation.Valid("a"));
 // => [0]
 ```
