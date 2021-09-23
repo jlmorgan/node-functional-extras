@@ -1,39 +1,42 @@
 "use strict";
 
+// Project
+const isEqual = require("../Arrays/equals");
+
 /**
- * The {@link Either} type is a right-biased disjunction that represents two possibilities: either a {@code Left} of
- * {@code a} or a {@code Right} of {@code b}. By convention, the {@link Either} is used to represent a value or an
- * error result of some function or process as a {@code Left} of the error or a {@code Right} of the value.
+ * The {@link Try} type is a right-biased disjunction that represents two possibilities; either a {@code Failure} of
+ * {@code a} or a {@code Success} of {@code b}. By convention, the {@link Try} is used to represent a value or failure
+ * result of some function or process as a {@code Failure} or a {@code Success} of the value.
  */
-class Either {
+class Try {
   /**
-   * Determines whether or not the {@code value} is a {@link Either}.
+   * Determines whether or not the {@code value} is a {@link Try}.
    *
    * @param {*} value - The value.
-   * @return {!Boolean} {@code true} for a {@link Either}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@link Try}; otherwise, {@code false}.
    */
-  static isEither(value) {
-    return value instanceof Either;
+  static isTry(value) {
+    return value instanceof Try;
   }
 
   /**
-   * Determines whether or not the {@link Either} is a {@code Left}.
+   * Determines whether or not the {@link Try} is a {@code Failure}.
    *
-   * @return {!Boolean} {@code true} for a {@code Left}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Failure}; otherwise, {@code false}.
    */
-  isLeft() {
-    return !this.isRight();
+  isFailure() {
+    return !this.isSuccess();
   }
 }
 
 /**
- * Encapsulates a left value.
+ * Encapsulates a failure value.
  *
- * @extends Either
+ * @extends Try
  */
-class Left extends Either {
+class Failure extends Try {
   /**
-   * @param {*} value - Left value.
+   * @param {*} value - Failure value.
    */
   constructor(value) {
     super();
@@ -48,17 +51,17 @@ class Left extends Either {
    * @return {!Boolean} {@code true} for equality; otherwise, {@code false}.
    */
   equals(other) {
-    return Either.isEither(other) &&
-      other.isLeft() &&
-      other.valueOf() === this.valueOf();
+    return Try.isTry(other) &&
+      other.isFailure() &&
+      isEqual(other.valueOf(), this.valueOf());
   }
 
   /**
-   * Determines whether or not the {@link Either} is a {@code Right}.
+   * Determines whether or not the {@link Try} is a {@code Success}.
    *
-   * @return {!Boolean} {@code true} for a {@code Right}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Success}; otherwise, {@code false}.
    */
-  isRight() {
+  isSuccess() {
     return false;
   }
 
@@ -68,7 +71,7 @@ class Left extends Either {
    * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
    */
   toJSON() {
-    return { left: this._value };
+    return { invalid: this._value };
   }
 
   /**
@@ -77,7 +80,7 @@ class Left extends Either {
    * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
-    return `Left(${this._value})`;
+    return `Failure(${this._value})`;
   }
 
   /**
@@ -91,13 +94,13 @@ class Left extends Either {
 }
 
 /**
- * Encapsulates a right value.
+ * Encapsulates a success value.
  *
- * @extends Either
+ * @extends Try
  */
-class Right extends Either {
+class Success extends Try {
   /**
-   * @param {*} value - Right value.
+   * @param {*} value - Success value.
    */
   constructor(value) {
     super();
@@ -112,17 +115,17 @@ class Right extends Either {
    * @return {!Boolean} {@code true} for equality; otherwise, {@code false}.
    */
   equals(other) {
-    return Either.isEither(other) &&
-      other.isRight() &&
-      other.valueOf() === this.valueOf();
+    return Try.isTry(other) &&
+      other.isValid() &&
+      isEqual(other.valueOf(), this.valueOf());
   }
 
   /**
-   * Determines whether or not the {@link Either} is a {@code Right}.
+   * Determines whether or not the {@link Try} is a {@code Success}.
    *
-   * @return {!Boolean} {@code true} for a {@code Right}; otherwise, {@code false}.
+   * @return {!Boolean} {@code true} for a {@code Success}; otherwise, {@code false}.
    */
-  isRight() {
+  isSuccess() {
     return true;
   }
 
@@ -132,7 +135,7 @@ class Right extends Either {
    * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
    */
   toJSON() {
-    return { right: this._value };
+    return { valid: this._value };
   }
 
   /**
@@ -141,7 +144,7 @@ class Right extends Either {
    * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
-    return `Right(${this._value})`;
+    return `Valid(${this._value})`;
   }
 
   /**
@@ -155,27 +158,27 @@ class Right extends Either {
 }
 
 module.exports = {
-  isEither: Either.isEither,
-
   /**
-   * Creates a {@code Left} from an arbitrary value.
+   * Creates a {@code Failure} from an arbitrary value.
    *
    * @constructor
    * @param {*} value - The value.
-   * @return {!Either} A {@code Left} of the value.
+   * @return {!Try} A {@code Failure} of the value.
    */
-  Left(value) {
-    return new Left(value);
+  Failure(value) {
+    return new Failure(value);
   },
 
+  isTry: Try.isTry,
+
   /**
-   * Creates a {@code Right} from an arbitrary value.
+   * Creates a {@code Success} from an arbitrary value.
    *
    * @constructor
    * @param {*} value - The value.
-   * @return {!Either} A {@code Right} of the value.
+   * @return {!Try} A {@code Success} of the value.
    */
-  Right(value) {
-    return new Right(value);
+  Success(value) {
+    return new Success(value);
   }
 };

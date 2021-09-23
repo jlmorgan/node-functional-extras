@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-
 "use strict";
 
 // Third Party
@@ -9,7 +7,6 @@ const { v4: uuid } = require("uuid");
 // Project
 const { Either, Tuple } = require("../..");
 
-/* eslint-disable max-lines-per-function */
 describe("Either", () => {
   describe(".eitherMap", () => {
     it("should throw exception for a non-Function Left morphism", () => {

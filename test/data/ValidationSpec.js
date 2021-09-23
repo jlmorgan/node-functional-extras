@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-
 "use strict";
 
 // Third Party
@@ -9,7 +7,6 @@ const { v4: uuid } = require("uuid");
 // Project
 const { Validation, Tuple } = require("../..");
 
-/* eslint-disable max-lines-per-function */
 describe("Validation", () => {
   describe(".concat", () => {
     it("should throw exception for non-Validation second", () => {

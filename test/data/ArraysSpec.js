@@ -7,7 +7,6 @@ const { v4: uuid } = require("uuid");
 // Project
 const { Arrays } = require("../..");
 
-/* eslint-disable max-lines-per-function */
 describe("Arrays", () => {
   describe("equals", () => {
     it("should throw an exception for non-Array second", () => {

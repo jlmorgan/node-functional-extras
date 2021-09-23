@@ -11,7 +11,7 @@ const Tuple = require("../Tuple");
  *
  * @memberof Either
  * @param {!Array.<Either>} list - The list of {@link Either}.
- * @return {Array} A couple of a list of the underlying {@code Left} values and a list of the underlying {@code Right}
+ * @return {!Tuple} A couple of a list of the underlying {@code Left} values and a list of the underlying {@code Right}
  * values.
  */
 function partitionEithers(list) {
