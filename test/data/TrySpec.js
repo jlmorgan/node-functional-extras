@@ -38,7 +38,7 @@ describe("Try", () => {
 
       expect(() => Try.tryMap(testFailureMorphism)(testSuccessMorphism)(testTry)).to.throw(
         TypeError,
-        "instance must be an Try"
+        "instance must be a Try"
       );
     });
 

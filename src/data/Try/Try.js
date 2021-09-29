@@ -1,8 +1,5 @@
 "use strict";
 
-// Project
-const isEqual = require("../Arrays/equals");
-
 /**
  * The {@link Try} type is a right-biased disjunction that represents two possibilities; either a {@code Failure} of
  * {@code a} or a {@code Success} of {@code b}. By convention, the {@link Try} is used to represent a value or failure
@@ -53,7 +50,7 @@ class Failure extends Try {
   equals(other) {
     return Try.isTry(other) &&
       other.isFailure() &&
-      isEqual(other.valueOf(), this.valueOf());
+      other.valueOf() === this.valueOf();
   }
 
   /**
@@ -71,7 +68,7 @@ class Failure extends Try {
    * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
    */
   toJSON() {
-    return { invalid: this._value };
+    return { failure: this._value };
   }
 
   /**
@@ -116,8 +113,8 @@ class Success extends Try {
    */
   equals(other) {
     return Try.isTry(other) &&
-      other.isValid() &&
-      isEqual(other.valueOf(), this.valueOf());
+      other.isSuccess() &&
+      other.valueOf() === this.valueOf();
   }
 
   /**
@@ -135,7 +132,7 @@ class Success extends Try {
    * @return {String} The {@code instance} as a {@code JSON} formatted {@code String}.
    */
   toJSON() {
-    return { valid: this._value };
+    return { success: this._value };
   }
 
   /**
@@ -144,7 +141,7 @@ class Success extends Try {
    * @return {!String} The {@code instance} as a {@code String}.
    */
   toString() {
-    return `Valid(${this._value})`;
+    return `Success(${this._value})`;
   }
 
   /**
